@@ -1,80 +1,50 @@
-<<<<<<< HEAD
-# React + TypeScript + Vite
+# My Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **Simulation Solution Engineer | Backend Developer | Digital Twin**
 
-Currently, two official plugins are available:
+산업용 공정 및 물류 시뮬레이션 솔루션을 개발하는 엔지니어입니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+제조 환경의 Digital Twin과 Discrete Event Simulation을 기반으로 모델링, 시뮬레이션 엔진, 런타임 제어 시스템을 개발하며, 확장 가능한 시뮬레이션 프레임워크 설계를 지향합니다.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## About Me
 
-## Expanding the ESLint configuration
+- Industrial Simulation Solution Engineer
+- Backend Developer
+- Digital Twin & Smart Factory
+- Manufacturing & Logistics Simulation
+- Simulation Framework Architecture
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Core Technologies
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+| Area | Technologies |
+|------|-------------|
+| Language | C#, Java, Python |
+| Frontend | React, TypeScript |
+| Backend | .NET, Spring, Flask |
+| Database | MSSQL, PostgreSQL, SQLite |
+| Tools | Git, GitHub |
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
 
-```
+## Current Focus
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+현재 개인 포트폴리오를 구축하며 다음 프로젝트를 진행하고 있습니다.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Web-based Factory Modeler
+- Simulation Engine Architecture
+- Runtime Monitoring UI
+- Digital Twin Portfolio
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
 
-```
-=======
-# My_Portfolio
-My Portfolio
->>>>>>> f40fa65e1c2d47c6fd5406f3347a18155a039547
+## Vision
+
+현실의 공장과 물류 시스템을 소프트웨어로 재현하고 검증할 수 있는 시뮬레이션 플랫폼을 만드는 개발자를 목표로 합니다.
+
+---
+
+*"Model. Simulate. Optimize."*
