@@ -1,4 +1,5 @@
 :root {
+  --font-size-increase: 2pt;
   font-family: Inter, "Segoe UI", "Noto Sans KR", Arial, sans-serif;
   color: #17273a;
   background: #ffffff;
@@ -8,7 +9,7 @@
   -moz-osx-font-smoothing: grayscale;
   font-optical-sizing: auto;
   font-weight: 400;
-  font-size: 16px;
+  font-size: calc(16px + var(--font-size-increase));
   line-height: 1.5;
 
   --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
