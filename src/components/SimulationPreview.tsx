@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import agvModel from '../assets/models/agv.png'
 import conveyorLoadedModel from '../assets/models/conveyor-loaded.png'
 import conveyorModel from '../assets/models/conveyor.png'
@@ -11,11 +12,51 @@ type LayoutDiagramProps = {
 
 function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
   const arrowId = `${idPrefix}-arrow`
+  const diagramRef = useRef<SVGSVGElement>(null)
+  const [diagramMetrics, setDiagramMetrics] = useState({ width: 920, gridSize: 24 })
+  const unitSize = (diagramMetrics.gridSize * 920) / diagramMetrics.width
+  const originX = 20
+  const portY = 20
+  const objectSize = unitSize * 2
+  const agvY = portY + objectSize + unitSize * 0.75
+  const conveyorY = agvY + unitSize + unitSize * 0.75
+  const conveyorPositions = [originX, originX + objectSize, originX + objectSize * 2]
+  const rackX = originX + objectSize * 3 + unitSize * 0.5
+  const rackY = conveyorY - unitSize / 2
+  const objectCenterX = originX + unitSize
+  const portCenterY = portY + unitSize
+  const agvCenterY = agvY + unitSize / 2
+  const conveyorCenterY = conveyorY + unitSize
+  const rackCenterX = rackX + unitSize * 1.5
+  const rackCenterY = rackY + unitSize * 1.5
+  const conveyorLabelY = conveyorY + objectSize + unitSize * 0.34
+  const conveyorLabelLineHeight = unitSize * 0.45
+
+  useEffect(() => {
+    const diagram = diagramRef.current
+    if (!diagram) return
+
+    const observer = new ResizeObserver(([entry]) => {
+      if (entry) {
+        const gridSize = Number.parseFloat(
+          getComputedStyle(diagram).getPropertyValue('--layout-grid-size'),
+        )
+        setDiagramMetrics({
+          width: entry.contentRect.width,
+          gridSize: Number.isFinite(gridSize) ? gridSize : 24,
+        })
+      }
+    })
+    observer.observe(diagram)
+
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <svg
+      ref={diagramRef}
       className={`layout-diagram${idPrefix === 'modeling' ? ' layout-diagram--modeler' : ''}`}
-      viewBox="0 0 720 440"
+      viewBox="0 0 920 560"
       preserveAspectRatio="xMidYMid meet"
       role="img"
       aria-labelledby={`${idPrefix}-title ${idPrefix}-description`}
@@ -37,31 +78,40 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
           <path d="M0 0v8l7-4z" fill="#42c7e8" />
         </marker>
       </defs>
+      <image href={portModel} x={originX} y={portY} width={objectSize} height={objectSize} preserveAspectRatio="none" />
+      <image href={agvModel} x={objectCenterX - unitSize / 2} y={agvY} width={unitSize} height={unitSize} preserveAspectRatio="xMidYMid meet" />
+      <g className="diagram-conveyor" aria-label="세 개의 연결된 컨베이어 유닛">
+        <image href={conveyorModel} x={conveyorPositions[0]} y={conveyorY} width={objectSize} height={objectSize} preserveAspectRatio="none" />
+        <image href={conveyorLoadedModel} x={conveyorPositions[1]} y={conveyorY} width={objectSize} height={objectSize} preserveAspectRatio="none" />
+        <image href={conveyorModel} x={conveyorPositions[2]} y={conveyorY} width={objectSize} height={objectSize} preserveAspectRatio="none" />
+        <rect className="diagram-conveyor__selection" x={conveyorPositions[1]} y={conveyorY} width={objectSize} height={objectSize} rx="3" />
+      </g>
+      <image href={rackModel} x={rackX} y={rackY} width={unitSize * 3} height={unitSize * 3} preserveAspectRatio="none" />
       {idPrefix === 'modeling' && (
         <g className="diagram-connection">
-          <path d="M124 91L157 202" markerEnd={`url(#${arrowId})`} />
-          <path d="M157 202L124 328" markerEnd={`url(#${arrowId})`} />
-          <path d="M124 328L264 328" markerEnd={`url(#${arrowId})`} />
-          <path d="M264 328L404 328" markerEnd={`url(#${arrowId})`} />
-          <path d="M404 328L608 310" markerEnd={`url(#${arrowId})`} />
+          <path d={`M${objectCenterX} ${portCenterY}L${objectCenterX} ${agvCenterY}`} markerEnd={`url(#${arrowId})`} />
+          <path d={`M${objectCenterX} ${agvCenterY}L${objectCenterX} ${conveyorCenterY}`} markerEnd={`url(#${arrowId})`} />
+          <path d={`M${objectCenterX} ${conveyorCenterY}L${objectCenterX + objectSize} ${conveyorCenterY}`} markerEnd={`url(#${arrowId})`} />
+          <path d={`M${objectCenterX + objectSize} ${conveyorCenterY}L${objectCenterX + objectSize * 2} ${conveyorCenterY}`} markerEnd={`url(#${arrowId})`} />
+          <path d={`M${objectCenterX + objectSize * 2} ${conveyorCenterY}L${rackCenterX} ${rackCenterY}`} markerEnd={`url(#${arrowId})`} />
         </g>
       )}
-      <image href={portModel} x="84" y="49" width="80" height="85" preserveAspectRatio="xMidYMid meet" />
-      <image href={agvModel} x="110" y="144" width="94" height="116" preserveAspectRatio="xMidYMid meet" />
-      <g className="diagram-conveyor" aria-label="세 개의 연결된 컨베이어 유닛">
-        <image href={conveyorModel} x="62" y="267" width="124" height="122" preserveAspectRatio="xMidYMid meet" />
-        <image href={conveyorLoadedModel} x="202" y="267" width="124" height="122" preserveAspectRatio="xMidYMid meet" />
-        <image href={conveyorModel} x="342" y="267" width="124" height="122" preserveAspectRatio="xMidYMid meet" />
-        <rect className="diagram-conveyor__selection" x="202" y="267" width="124" height="122" rx="3" />
-      </g>
-      <image href={rackModel} x="550" y="253" width="116" height="110" preserveAspectRatio="xMidYMid meet" />
       <g className="diagram-object-label">
-        <text x="54" y="40">PORT-01</text>
-        <text x="70" y="140">AGV-01</text>
-        <text x="77" y="408">CONVEYOR-01</text>
-        <text x="217" y="408">CONVEYOR-02</text>
-        <text x="357" y="408">CONVEYOR-03</text>
-        <text x="542" y="247">RACK-01</text>
+        <text x={objectCenterX} y={portY - 7} textAnchor="middle">PORT-01</text>
+        <text x={objectCenterX} y={agvY + unitSize + unitSize * 0.42} textAnchor="middle">AGV-01</text>
+        <text x={conveyorPositions[0] + unitSize} y={conveyorLabelY} textAnchor="middle" style={{ fontSize: unitSize * 0.32 }}>
+          <tspan x={conveyorPositions[0] + unitSize}>CONVEYOR-</tspan>
+          <tspan x={conveyorPositions[0] + unitSize} dy={conveyorLabelLineHeight}>01</tspan>
+        </text>
+        <text x={conveyorPositions[1] + unitSize} y={conveyorLabelY} textAnchor="middle" style={{ fontSize: unitSize * 0.32 }}>
+          <tspan x={conveyorPositions[1] + unitSize}>CONVEYOR-</tspan>
+          <tspan x={conveyorPositions[1] + unitSize} dy={conveyorLabelLineHeight}>02</tspan>
+        </text>
+        <text x={conveyorPositions[2] + unitSize} y={conveyorLabelY} textAnchor="middle" style={{ fontSize: unitSize * 0.32 }}>
+          <tspan x={conveyorPositions[2] + unitSize}>CONVEYOR-</tspan>
+          <tspan x={conveyorPositions[2] + unitSize} dy={conveyorLabelLineHeight}>03</tspan>
+        </text>
+        <text x={rackX} y={rackY - 7}>RACK-01</text>
       </g>
     </svg>
   )

@@ -2448,13 +2448,14 @@
 
 .screen-layout,
 .runtime-layout {
+  --layout-grid-size: 24px;
   min-width: 0;
   padding: 9px;
   background-color: #0b1524;
   background-image:
     linear-gradient(rgba(40, 61, 84, 0.3) 1px, transparent 1px),
     linear-gradient(90deg, rgba(40, 61, 84, 0.3) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-size: var(--layout-grid-size) var(--layout-grid-size);
 }
 
 .screen-layout {
@@ -2649,11 +2650,11 @@
 }
 
 .runtime-action-dialog {
-  width: min(270px, 46%);
+  width: min(270px, 35%);
   position: absolute;
   z-index: 1;
   top: 60%;
-  left: 48%;
+  left: 64%;
   overflow: hidden;
   color: #cbd7e3;
   background: rgba(15, 28, 44, 0.97);
@@ -2823,12 +2824,17 @@
   }
 
   .runtime-action-dialog {
-    width: min(250px, 46%);
-    left: 48%;
+    width: min(250px, 35%);
+    left: 64%;
   }
 }
 
 @media (max-width: 620px) {
+  .screen-layout,
+  .runtime-layout {
+    --layout-grid-size: 16px;
+  }
+
   .simulation-preview {
     gap: 12px;
   }
@@ -2869,9 +2875,9 @@
   }
 
   .runtime-action-dialog {
-    width: calc(52% - 8px);
+    width: calc(50% - 8px);
     top: 62%;
-    left: 46%;
+    left: 48%;
   }
 
   .simulation-screen__footer > span:last-child {
