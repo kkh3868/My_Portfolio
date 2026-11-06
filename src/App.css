@@ -2491,9 +2491,7 @@
   letter-spacing: 0.06em;
 }
 
-.diagram-object-label text,
-.diagram-port text,
-.diagram-robot text {
+.diagram-object-label text {
   paint-order: stroke;
   stroke: #0b1524;
   stroke-width: 4px;
@@ -2508,131 +2506,10 @@
   fill: #9db8d0;
 }
 
-.diagram-port rect:first-child {
-  fill: #142a3e;
-  stroke: #54a9da;
-  stroke-width: 2;
-}
-
-.diagram-port__face {
-  fill: #1c4560;
-  stroke: #72c9f4;
-  stroke-width: 1.5;
-}
-
-.diagram-port path,
-.diagram-port circle {
-  fill: #71d5ed;
-  stroke: #71d5ed;
-  stroke-width: 1.5;
-}
-
-.diagram-port text {
-  fill: #e0edf7;
-  font-family: var(--mono);
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.diagram-port .diagram-small-label {
-  fill: #87a2bb;
-  font-size: 9px;
-  font-weight: 400;
-}
-
-.diagram-robot__body {
-  fill: #1a2e47;
-  stroke: #82a8ca;
-  stroke-width: 2;
-}
-
-.diagram-robot__deck {
-  fill: #233d59;
-  stroke: #507a9e;
-}
-
-.diagram-robot__load {
-  fill: #ae814b;
-  stroke: #f0c47e;
-  stroke-width: 1.5;
-}
-
-.diagram-robot__load-mark {
+.diagram-conveyor__selection {
   fill: none;
-  stroke: #f4d5a4;
-  stroke-width: 1;
-}
-
-.diagram-robot__wheel {
-  fill: none;
-  stroke: #8ea9c2;
-  stroke-width: 4;
-  stroke-linecap: round;
-}
-
-.diagram-robot__sensor {
-  fill: #6de0bc;
-  stroke: #a4ffe2;
-  stroke-width: 1;
-}
-
-.diagram-robot text {
-  fill: #a8c6df;
-  font-family: var(--mono);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.diagram-conveyor__frame {
-  fill: #13263a;
-  stroke: #6684a0;
-  stroke-width: 1.5;
-}
-
-.diagram-conveyor__frame--selected {
-  fill: #15334b;
   stroke: #57b9e8;
-  stroke-width: 2;
-}
-
-.diagram-conveyor__belt {
-  fill: #1c3348;
-}
-
-.diagram-conveyor__rail {
-  fill: none;
-  stroke: #92adc4;
-  stroke-width: 2;
-}
-
-.diagram-conveyor__roller {
-  fill: none;
-  stroke: #6f8da8;
-  stroke-width: 1.3;
-}
-
-.diagram-conveyor__material {
-  fill: #b9894d;
-  stroke: #f2c77f;
-  stroke-width: 1.5;
-}
-
-.diagram-rack__frame {
-  fill: #15263a;
-  stroke: #82a2bd;
-  stroke-width: 2;
-}
-
-.diagram-rack__shelves {
-  fill: none;
-  stroke: #7694af;
-  stroke-width: 2;
-}
-
-.diagram-rack__load {
-  fill: #29445d;
-  stroke: #7596b2;
-  stroke-width: 1;
+  stroke-width: 3;
 }
 
 .diagram-connection {
@@ -3044,14 +2921,6 @@
 .layout-diagram--modeler .diagram-object-label {
   font-size: 15px;
   font-weight: 600;
-}
-
-.layout-diagram--modeler .diagram-port text {
-  font-size: 14px;
-}
-
-.layout-diagram--modeler .diagram-port .diagram-small-label {
-  font-size: 9px;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,3 +1,8 @@
+import agvModel from '../assets/models/agv.png'
+import conveyorLoadedModel from '../assets/models/conveyor-loaded.png'
+import conveyorModel from '../assets/models/conveyor.png'
+import portModel from '../assets/models/port.png'
+import rackModel from '../assets/models/rack.png'
 import { Icon } from './Icon'
 
 type LayoutDiagramProps = {
@@ -10,14 +15,14 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
   return (
     <svg
       className={`layout-diagram${idPrefix === 'modeling' ? ' layout-diagram--modeler' : ''}`}
-      viewBox="0 0 720 390"
+      viewBox="0 0 720 440"
       preserveAspectRatio="xMidYMid meet"
       role="img"
       aria-labelledby={`${idPrefix}-title ${idPrefix}-description`}
     >
       <title id={`${idPrefix}-title`}>2D 공정 및 물류 시뮬레이션 레이아웃</title>
       <desc id={`${idPrefix}-description`}>
-        위에서부터 자재 공급 Port, Mobile Transfer 로봇, 가로로 연결된 Conveyor 세 대와
+        위에서부터 자재 공급 Port, AGV, 가로로 연결된 Conveyor 세 대와
         오른쪽 Rack 순서로 배치된 레이아웃입니다.
       </desc>
       <defs>
@@ -32,80 +37,32 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
           <path d="M0 0v8l7-4z" fill="#42c7e8" />
         </marker>
       </defs>
-      <g className="diagram-object-label">
-        <text x="54" y="40">PORT-01</text>
-        <text x="70" y="143">AGV-01</text>
-        <text x="77" y="332">CONVEYOR-01</text>
-        <text x="217" y="332">CONVEYOR-02</text>
-        <text x="357" y="332">CONVEYOR-03</text>
-        <text x="542" y="197">RACK-01</text>
-      </g>
-
-      <g className="diagram-port">
-        <rect x="54" y="49" width="138" height="52" rx="4" />
-        <rect className="diagram-port__face" x="62" y="57" width="42" height="36" rx="3" />
-        <path d="M72 84V70h8v14m6 0V64h8v20" />
-        <circle cx="181" cy="61" r="3" />
-        <text x="112" y="72">PORT-01</text>
-        <text className="diagram-small-label" x="112" y="85">SUPPLY STATION</text>
-      </g>
-
-      <g className="diagram-robot">
-        <rect className="diagram-robot__body" x="54" y="156" width="206" height="60" rx="12" />
-        <rect className="diagram-robot__deck" x="96" y="165" width="87" height="40" rx="5" />
-        <rect className="diagram-robot__load" x="118" y="170" width="42" height="29" rx="3" />
-        <path className="diagram-robot__load-mark" d="M125 177h28m-28 7h28m-28 7h18" />
-        <path className="diagram-robot__wheel" d="M65 152v7m24-7v7m124-7v7m24-7v7M65 213v7m24-7v7m124-7v7m24-7v7" />
-        <circle className="diagram-robot__sensor" cx="242" cy="186" r="4" />
-        <text x="68" y="192">AMR</text>
-      </g>
-
-      <g className="diagram-conveyor" aria-label="세 개의 연결된 컨베이어 유닛">
-        <g transform="translate(54 260)">
-          <rect className="diagram-conveyor__frame" width="140" height="48" rx="3" />
-          <path className="diagram-conveyor__belt" d="M4 8h132v30H4z" />
-          <path className="diagram-conveyor__rail" d="M4 7h132m-132 32h132" />
-          <path className="diagram-conveyor__roller" d="M14 9v28m18-28v28m18-28v28m18-28v28m18-28v28m18-28v28m18-28v28m18-28v28" />
-          <rect className="diagram-conveyor__material" x="49" y="14" width="20" height="18" rx="2" />
-        </g>
-        <g transform="translate(194 260)">
-          <rect className="diagram-conveyor__frame diagram-conveyor__frame--selected" width="140" height="48" rx="3" />
-          <path className="diagram-conveyor__belt" d="M4 8h132v30H4z" />
-          <path className="diagram-conveyor__rail" d="M4 7h132m-132 32h132" />
-          <path className="diagram-conveyor__roller" d="M14 9v28m18-28v28m18-28v28m18-28v28m18-28v28m18-28v28m18-28v28m18-28v28" />
-          <rect className="diagram-conveyor__material" x="63" y="14" width="20" height="18" rx="2" />
-        </g>
-        <g transform="translate(334 260)">
-          <rect className="diagram-conveyor__frame" width="140" height="48" rx="3" />
-          <path className="diagram-conveyor__belt" d="M4 8h132v30H4z" />
-          <path className="diagram-conveyor__rail" d="M4 7h132m-132 32h132" />
-          <path className="diagram-conveyor__roller" d="M14 9v28m18-28v28m18-28v28m18-28v28m18-28v28m18-28v28m18-28v28m18-28v28" />
-          <rect className="diagram-conveyor__material" x="91" y="14" width="20" height="18" rx="2" />
-        </g>
-      </g>
-
-      <g className="diagram-rack">
-        <rect className="diagram-rack__frame" x="546" y="210" width="122" height="148" rx="3" />
-        <path className="diagram-rack__shelves" d="M546 246h122m-122 37h122m-122 37h122M554 210v148m106-148v148" />
-        <rect className="diagram-rack__load" x="560" y="217" width="34" height="22" rx="2" />
-        <rect className="diagram-rack__load" x="612" y="217" width="39" height="22" rx="2" />
-        <rect className="diagram-rack__load" x="560" y="253" width="44" height="24" rx="2" />
-        <rect className="diagram-rack__load" x="615" y="253" width="36" height="24" rx="2" />
-        <rect className="diagram-rack__load" x="560" y="290" width="34" height="24" rx="2" />
-        <rect className="diagram-rack__load" x="605" y="290" width="46" height="24" rx="2" />
-        <rect className="diagram-rack__load" x="566" y="327" width="39" height="24" rx="2" />
-        <rect className="diagram-rack__load" x="612" y="327" width="39" height="24" rx="2" />
-      </g>
-
       {idPrefix === 'modeling' && (
         <g className="diagram-connection">
-          <path d="M123 75L157 186" markerEnd={`url(#${arrowId})`} />
-          <path d="M157 186L124 284" markerEnd={`url(#${arrowId})`} />
-          <path d="M124 284L264 284" markerEnd={`url(#${arrowId})`} />
-          <path d="M264 284L404 284" markerEnd={`url(#${arrowId})`} />
-          <path d="M404 284L607 284" markerEnd={`url(#${arrowId})`} />
+          <path d="M124 91L157 202" markerEnd={`url(#${arrowId})`} />
+          <path d="M157 202L124 328" markerEnd={`url(#${arrowId})`} />
+          <path d="M124 328L264 328" markerEnd={`url(#${arrowId})`} />
+          <path d="M264 328L404 328" markerEnd={`url(#${arrowId})`} />
+          <path d="M404 328L608 310" markerEnd={`url(#${arrowId})`} />
         </g>
       )}
+      <image href={portModel} x="84" y="49" width="80" height="85" preserveAspectRatio="xMidYMid meet" />
+      <image href={agvModel} x="110" y="144" width="94" height="116" preserveAspectRatio="xMidYMid meet" />
+      <g className="diagram-conveyor" aria-label="세 개의 연결된 컨베이어 유닛">
+        <image href={conveyorModel} x="62" y="267" width="124" height="122" preserveAspectRatio="xMidYMid meet" />
+        <image href={conveyorLoadedModel} x="202" y="267" width="124" height="122" preserveAspectRatio="xMidYMid meet" />
+        <image href={conveyorModel} x="342" y="267" width="124" height="122" preserveAspectRatio="xMidYMid meet" />
+        <rect className="diagram-conveyor__selection" x="202" y="267" width="124" height="122" rx="3" />
+      </g>
+      <image href={rackModel} x="550" y="253" width="116" height="110" preserveAspectRatio="xMidYMid meet" />
+      <g className="diagram-object-label">
+        <text x="54" y="40">PORT-01</text>
+        <text x="70" y="140">AGV-01</text>
+        <text x="77" y="408">CONVEYOR-01</text>
+        <text x="217" y="408">CONVEYOR-02</text>
+        <text x="357" y="408">CONVEYOR-03</text>
+        <text x="542" y="247">RACK-01</text>
+      </g>
     </svg>
   )
 }
