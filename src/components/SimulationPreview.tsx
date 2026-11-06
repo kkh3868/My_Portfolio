@@ -1,169 +1,221 @@
 import { Icon } from './Icon'
 
+type LayoutDiagramProps = {
+  idPrefix: 'modeling' | 'runtime'
+}
+
+function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
+  const arrowId = `${idPrefix}-arrow`
+
+  return (
+    <svg
+      className={`layout-diagram${idPrefix === 'modeling' ? ' layout-diagram--modeler' : ''}`}
+      viewBox="0 0 720 390"
+      preserveAspectRatio="xMidYMid meet"
+      role="img"
+      aria-labelledby={`${idPrefix}-title ${idPrefix}-description`}
+    >
+      <title id={`${idPrefix}-title`}>2D 공정 및 물류 시뮬레이션 레이아웃</title>
+      <desc id={`${idPrefix}-description`}>
+        위에서부터 자재 공급 Port, Mobile Transfer 로봇, 가로로 연결된 Conveyor 세 대와
+        오른쪽 Rack 순서로 배치된 레이아웃입니다.
+      </desc>
+      <defs>
+        <marker
+          id={arrowId}
+          markerWidth="9"
+          markerHeight="9"
+          refX="7"
+          refY="4"
+          orient="auto"
+        >
+          <path d="M0 0v8l7-4z" fill="#42c7e8" />
+        </marker>
+      </defs>
+      <g className="diagram-object-label">
+        <text x="54" y="40">PORT-01</text>
+        <text x="70" y="143">AGV-01</text>
+        <text x="77" y="332">CONVEYOR-01</text>
+        <text x="217" y="332">CONVEYOR-02</text>
+        <text x="357" y="332">CONVEYOR-03</text>
+        <text x="542" y="197">RACK-01</text>
+      </g>
+
+      <g className="diagram-port">
+        <rect x="54" y="49" width="138" height="52" rx="4" />
+        <rect className="diagram-port__face" x="62" y="57" width="42" height="36" rx="3" />
+        <path d="M72 84V70h8v14m6 0V64h8v20" />
+        <circle cx="181" cy="61" r="3" />
+        <text x="112" y="72">PORT-01</text>
+        <text className="diagram-small-label" x="112" y="85">SUPPLY STATION</text>
+      </g>
+
+      <g className="diagram-robot">
+        <rect className="diagram-robot__body" x="54" y="156" width="206" height="60" rx="12" />
+        <rect className="diagram-robot__deck" x="96" y="165" width="87" height="40" rx="5" />
+        <rect className="diagram-robot__load" x="118" y="170" width="42" height="29" rx="3" />
+        <path className="diagram-robot__load-mark" d="M125 177h28m-28 7h28m-28 7h18" />
+        <path className="diagram-robot__wheel" d="M65 152v7m24-7v7m124-7v7m24-7v7M65 213v7m24-7v7m124-7v7m24-7v7" />
+        <circle className="diagram-robot__sensor" cx="242" cy="186" r="4" />
+        <text x="68" y="192">AMR</text>
+      </g>
+
+      <g className="diagram-conveyor" aria-label="세 개의 연결된 컨베이어 유닛">
+        <g transform="translate(54 260)">
+          <rect className="diagram-conveyor__frame" width="140" height="48" rx="3" />
+          <path className="diagram-conveyor__belt" d="M4 8h132v30H4z" />
+          <path className="diagram-conveyor__rail" d="M4 7h132m-132 32h132" />
+          <path className="diagram-conveyor__roller" d="M14 9v28m18-28v28m18-28v28m18-28v28m18-28v28m18-28v28m18-28v28m18-28v28" />
+          <rect className="diagram-conveyor__material" x="49" y="14" width="20" height="18" rx="2" />
+        </g>
+        <g transform="translate(194 260)">
+          <rect className="diagram-conveyor__frame diagram-conveyor__frame--selected" width="140" height="48" rx="3" />
+          <path className="diagram-conveyor__belt" d="M4 8h132v30H4z" />
+          <path className="diagram-conveyor__rail" d="M4 7h132m-132 32h132" />
+          <path className="diagram-conveyor__roller" d="M14 9v28m18-28v28m18-28v28m18-28v28m18-28v28m18-28v28m18-28v28m18-28v28" />
+          <rect className="diagram-conveyor__material" x="63" y="14" width="20" height="18" rx="2" />
+        </g>
+        <g transform="translate(334 260)">
+          <rect className="diagram-conveyor__frame" width="140" height="48" rx="3" />
+          <path className="diagram-conveyor__belt" d="M4 8h132v30H4z" />
+          <path className="diagram-conveyor__rail" d="M4 7h132m-132 32h132" />
+          <path className="diagram-conveyor__roller" d="M14 9v28m18-28v28m18-28v28m18-28v28m18-28v28m18-28v28m18-28v28m18-28v28" />
+          <rect className="diagram-conveyor__material" x="91" y="14" width="20" height="18" rx="2" />
+        </g>
+      </g>
+
+      <g className="diagram-rack">
+        <rect className="diagram-rack__frame" x="546" y="210" width="122" height="148" rx="3" />
+        <path className="diagram-rack__shelves" d="M546 246h122m-122 37h122m-122 37h122M554 210v148m106-148v148" />
+        <rect className="diagram-rack__load" x="560" y="217" width="34" height="22" rx="2" />
+        <rect className="diagram-rack__load" x="612" y="217" width="39" height="22" rx="2" />
+        <rect className="diagram-rack__load" x="560" y="253" width="44" height="24" rx="2" />
+        <rect className="diagram-rack__load" x="615" y="253" width="36" height="24" rx="2" />
+        <rect className="diagram-rack__load" x="560" y="290" width="34" height="24" rx="2" />
+        <rect className="diagram-rack__load" x="605" y="290" width="46" height="24" rx="2" />
+        <rect className="diagram-rack__load" x="566" y="327" width="39" height="24" rx="2" />
+        <rect className="diagram-rack__load" x="612" y="327" width="39" height="24" rx="2" />
+      </g>
+
+      {idPrefix === 'modeling' && (
+        <g className="diagram-connection">
+          <path d="M123 75L157 186" markerEnd={`url(#${arrowId})`} />
+          <path d="M157 186L124 284" markerEnd={`url(#${arrowId})`} />
+          <path d="M124 284L264 284" markerEnd={`url(#${arrowId})`} />
+          <path d="M264 284L404 284" markerEnd={`url(#${arrowId})`} />
+          <path d="M404 284L607 284" markerEnd={`url(#${arrowId})`} />
+        </g>
+      )}
+    </svg>
+  )
+}
+
 export function SimulationPreview() {
   return (
-    <div className="product-window">
-      <div className="window-titlebar">
-        <div className="window-brand">
-          <span className="brand-mark" aria-hidden="true">
-            <span />
-            <span />
-            <span />
-          </span>
-          <span>SIMULATION WORKSPACE</span>
+    <div className="simulation-preview">
+      <section className="simulation-screen simulation-screen--modeling" aria-label="모델링 화면 예시">
+        <div className="simulation-screen__header">
+          <div className="screen-title">
+            <span className="screen-title__mark"><Icon name="layout" size={15} /></span>
+            <strong>MODELER</strong>
+          </div>
         </div>
-        <span className="window-project">Factory Flow / Layout 01</span>
-        <span className="window-status">
-          <span className="status-dot" />
-          MODEL READY
-        </span>
-      </div>
-      <div className="workspace">
-        <aside className="tool-rail" aria-label="레이아웃 도구 예시">
-          <span className="tool-rail__active"><Icon name="layout" size={17} /></span>
-          <span><Icon name="objects" size={17} /></span>
-          <span><Icon name="flow" size={17} /></span>
-          <span className="tool-rail__divider" />
-          <span className="tool-rail__text">2D</span>
-        </aside>
-        <div className="layout-canvas">
-          <div className="canvas-heading">
-            <div>
-              <span className="canvas-eyebrow">TOP VIEW · 2D LAYOUT</span>
-              <strong>Material Flow Overview</strong>
+        <div className="modeling-workspace">
+          <aside className="model-palette" aria-label="모델 오브젝트 목록">
+            <span className="screen-section-label">MODELS</span>
+            <span><i className="palette-symbol palette-symbol--port">P</i>Port</span>
+            <span><i className="palette-symbol palette-symbol--robot">M</i>Mobile</span>
+            <span><i className="palette-symbol palette-symbol--conveyor">C</i>Conveyor</span>
+            <span><i className="palette-symbol palette-symbol--rack">R</i>Rack</span>
+          </aside>
+          <div className="screen-layout">
+            <div className="screen-layout__heading">
+              <span>LAYOUT EDITOR</span>
+              <span>− &nbsp; 100% &nbsp; +</span>
             </div>
-            <span className="canvas-zoom">− &nbsp; 100% &nbsp; +</span>
+            <LayoutDiagram idPrefix="modeling" />
           </div>
-          <svg
-            className="factory-layout"
-            viewBox="0 0 720 380"
-            role="img"
-            aria-labelledby="layout-title layout-description"
-          >
-            <title id="layout-title">2D 공정 및 물류 레이아웃 미리보기</title>
-            <desc id="layout-description">
-              컨베이어, 랙, 공정 포트와 이동 장치 간의 자재 이동 경로를 위에서
-              내려다본 레이아웃입니다.
-            </desc>
-            <defs>
-              <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
-                <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1b2b40" strokeWidth="1" />
-              </pattern>
-              <marker
-                id="flow-arrow"
-                markerWidth="8"
-                markerHeight="8"
-                refX="6"
-                refY="3"
-                orient="auto"
-              >
-                <path d="M0,0 L0,6 L6,3 z" fill="#42c7e8" />
-              </marker>
-            </defs>
-            <rect width="720" height="380" fill="#0b1524" />
-            <rect width="720" height="380" fill="url(#grid)" />
+          <aside className="simulation-properties" aria-label="선택 오브젝트 속성">
+            <span className="screen-section-label">PROPERTIES</span>
+            <strong>Conveyor-02</strong>
+            <span className="property-tag">Model: Conveyor</span>
+            <small>Position</small>
+            <b>X 10 · Y 5 · Z 1</b>
+            <small>Flow speed</small>
+            <b>1 m/s</b>
+            <small>Capacity</small>
+            <b>1 Material</b>
+            <small>Connection</small>
+            <b>Conveyor-03</b>
+            <small>Communication</small>
+            <b>TCP/IP · 127.0.0.1;8080</b>
+          </aside>
+        </div>
+      </section>
 
-            <g className="layout-zone">
-              <rect x="24" y="28" width="672" height="324" rx="8" />
-              <path d="M24 110h672M24 272h672M188 28v324M520 28v324" />
-              <text x="40" y="50">PRODUCTION AREA</text>
-              <text x="40" y="130">TRANSFER AISLE</text>
-              <text x="40" y="292">INBOUND / OUTBOUND</text>
-            </g>
-
-            <g className="rack">
-              <rect x="48" y="72" width="118" height="68" rx="4" />
-              <path d="M48 94h118M48 117h118M87 72v68M126 72v68" />
-              <text x="58" y="65">RAW MATERIAL RACK</text>
-              <rect x="548" y="72" width="118" height="68" rx="4" />
-              <path d="M548 94h118M548 117h118M587 72v68M626 72v68" />
-              <text x="557" y="65">FINISHED GOODS</text>
-            </g>
-
-            <g className="conveyor">
-              <path d="M82 220h544" />
-              <path className="conveyor-center" d="M82 220h544" />
-              <path d="M112 210v20m30-20v20m30-20v20m30-20v20m30-20v20m30-20v20m30-20v20m30-20v20m30-20v20m30-20v20m30-20v20m30-20v20m30-20v20m30-20v20m30-20v20m30-20v20m30-20v20" />
-              <text x="300" y="247">MAIN CONVEYOR</text>
-            </g>
-
-            <g className="processing-port">
-              <rect x="250" y="145" width="94" height="48" rx="6" />
-              <path d="M264 159h20v20h-20zM297 169h33" />
-              <text x="251" y="137">PROCESSING PORT</text>
-              <circle cx="333" cy="155" r="4" />
-            </g>
-            <g className="processing-port processing-port--secondary">
-              <rect x="402" y="145" width="94" height="48" rx="6" />
-              <path d="M416 159h20v20h-20zM449 169h33" />
-              <text x="407" y="137">ASSEMBLY PORT</text>
-              <circle cx="485" cy="155" r="4" />
-            </g>
-
-            <g className="material-flow">
-              <path d="M164 184v-22h77" markerEnd="url(#flow-arrow)" />
-              <path d="M344 169h57" markerEnd="url(#flow-arrow)" />
-              <path d="M496 169h70v30" markerEnd="url(#flow-arrow)" />
-              <path d="M566 242v47H160v-46" markerEnd="url(#flow-arrow)" />
-            </g>
-
-            <g className="mobile-transfer">
-              <rect x="365" y="286" width="54" height="36" rx="7" />
-              <circle cx="377" cy="326" r="4" />
-              <circle cx="407" cy="326" r="4" />
-              <rect x="380" y="296" width="24" height="15" rx="3" />
-              <circle cx="392" cy="303" r="3" />
-              <text x="356" y="345">MOBILE TRANSFER</text>
-            </g>
-
-            <g className="material-unit">
-              <rect x="155" y="209" width="22" height="22" rx="4" />
-              <path d="m160 220 4 4 8-9" />
-              <rect x="441" y="209" width="22" height="22" rx="4" />
-              <circle cx="452" cy="220" r="4" />
-            </g>
-
-            <g className="layout-callout">
-              <rect x="548" y="292" width="126" height="42" rx="6" />
-              <circle cx="562" cy="307" r="4" />
-              <text x="572" y="310">FLOW ACTIVE</text>
-              <text x="560" y="325">Route A → Port 02</text>
-            </g>
-          </svg>
-          <div className="canvas-legend">
-            <span><i className="legend-dot legend-dot--blue" /> Material Flow</span>
-            <span><i className="legend-dot legend-dot--green" /> Available</span>
-            <span><i className="legend-dot legend-dot--amber" /> Processing</span>
+      <section className="simulation-screen simulation-screen--runtime" aria-label="시뮬레이션 제어 화면 예시">
+        <div className="simulation-screen__header">
+          <div className="screen-title">
+            <span className="screen-title__mark screen-title__mark--runtime">▶</span>
+            <strong>SIMULATION CONTROL UI</strong>
+          </div>
+          <span className="runtime-live"><i className="status-dot" /> RUNNING</span>
+        </div>
+        <div className="runtime-controlbar">
+          <div className="runtime-clock">
+            <small>SIMULATION CLOCK</small>
+            <strong>00:12:34.520</strong>
+          </div>
+          <div className="runtime-speed">
+            <small>PLAYBACK SPEED</small>
+            <strong>2×</strong>
+          </div>
+          <div className="runtime-actions" aria-label="시뮬레이션 제어">
+            <span>Ⅱ <b>정지</b></span>
+            <span>▶ <b>재개</b></span>
+            <span>＋ <b>2배 빠르게</b></span>
+            <span>－ <b>2배 느리게</b></span>
           </div>
         </div>
-        <aside className="object-panel">
-          <span className="panel-eyebrow">OBJECT STATUS</span>
-          <strong>Runtime Objects</strong>
-          <div className="object-row">
-            <span className="object-symbol object-symbol--conveyor">↔</span>
-            <span><b>Conveyor-01</b><small>Conveyor</small></span>
-            <i className="object-state object-state--ready" />
+        <div className="runtime-layout">
+          <div className="screen-layout__heading">
+            <span>LIVE LAYOUT / TOP VIEW</span>
+            <span>SIMULATION TIME · 2×</span>
           </div>
-          <div className="object-row">
-            <span className="object-symbol object-symbol--port">P</span>
-            <span><b>Port-02</b><small>Processing Port</small></span>
-            <i className="object-state object-state--busy" />
+          <LayoutDiagram idPrefix="runtime" />
+          <div className="runtime-action-dialog" aria-label="Conveyor-02 상태 변경 실행 예시">
+            <div className="runtime-action-dialog__titlebar">
+              <span>EXECUTE ACTION</span>
+              <span aria-hidden="true">×</span>
+            </div>
+            <div className="runtime-action-dialog__body">
+              <span className="runtime-action-dialog__target">OBJECT · CONVEYOR-02</span>
+              <div className="runtime-action-dialog__select">
+                <span>Action</span>
+                <strong>Change State <i aria-hidden="true">⌄</i></strong>
+              </div>
+              <div className="runtime-action-dialog__parameter">
+                <span className="runtime-action-dialog__state-label">Current State</span>
+                <strong className="runtime-action-dialog__current-state">RUN</strong>
+              </div>
+              <div className="runtime-action-dialog__parameter">
+                <span className="runtime-action-dialog__state-label">Change to</span>
+                <strong className="runtime-action-dialog__next-state">
+                  DOWN <i aria-hidden="true">⌄</i>
+                </strong>
+              </div>
+            </div>
+            <div className="runtime-action-dialog__footer">
+              <span>Cancel</span>
+              <strong>EXECUTE</strong>
+            </div>
           </div>
-          <div className="object-row">
-            <span className="object-symbol object-symbol--mobile">M</span>
-            <span><b>Transfer-01</b><small>Mobile Transfer</small></span>
-            <i className="object-state object-state--ready" />
-          </div>
-          <div className="runtime-card">
-            <span>SIMULATION STATE</span>
-            <strong><i /> READY TO RUN</strong>
-          </div>
-        </aside>
-      </div>
-      <div className="window-foot">
-        <span><i className="status-dot" /> Conceptual interface · 2D top view</span>
-        <span>MODEL / FLOW / STATUS</span>
-      </div>
+        </div>
+        <div className="simulation-screen__footer">
+          <span><i className="status-dot" /> ENGINE CONNECTED</span>
+          <span>OBJECT STATES · MATERIAL FLOW</span>
+        </div>
+      </section>
     </div>
   )
 }
