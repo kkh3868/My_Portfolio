@@ -179,8 +179,7 @@ export function SimulationPreview() {
         </div>
         <div className="runtime-layout">
           <div className="screen-layout__heading">
-            <span>LIVE LAYOUT / TOP VIEW</span>
-            <span>SIMULATION TIME · 2×</span>
+            <span>LIVE SIMULATION</span>
           </div>
           <LayoutDiagram idPrefix="runtime" />
           <div className="runtime-action-dialog" aria-label="Conveyor-02 상태 변경 실행 예시">
@@ -210,10 +209,6 @@ export function SimulationPreview() {
               <strong>EXECUTE</strong>
             </div>
           </div>
-        </div>
-        <div className="simulation-screen__footer">
-          <span><i className="status-dot" /> ENGINE CONNECTED</span>
-          <span>OBJECT STATES · MATERIAL FLOW</span>
         </div>
       </section>
     </div>
