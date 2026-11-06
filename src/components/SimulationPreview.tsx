@@ -124,7 +124,7 @@ export function SimulationPreview() {
           <aside className="model-palette" aria-label="모델 오브젝트 목록">
             <span className="screen-section-label">MODELS</span>
             <span><i className="palette-symbol palette-symbol--port">P</i>Port</span>
-            <span><i className="palette-symbol palette-symbol--robot">M</i>Mobile</span>
+            <span><i className="palette-symbol palette-symbol--robot">A</i>AGV</span>
             <span><i className="palette-symbol palette-symbol--conveyor">C</i>Conveyor</span>
             <span><i className="palette-symbol palette-symbol--rack">R</i>Rack</span>
           </aside>
