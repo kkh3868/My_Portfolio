@@ -359,7 +359,7 @@ export function SimulationPreview() {
             <strong>Conveyor-02</strong>
             <span className="property-tag">Model: Conveyor</span>
             <small>Position</small>
-            <b>X 10 · Y 5 · Z 1</b>
+            <b>X : 3.5 / Y : 7.5 / Z : 1</b>
             <small>Flow speed</small>
             <b>1 m/s</b>
             <small>Capacity</small>
