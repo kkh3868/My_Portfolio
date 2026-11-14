@@ -269,7 +269,7 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
     <svg
       ref={diagramRef}
       className={`layout-diagram${idPrefix === 'modeling' ? ' layout-diagram--modeler' : ''}`}
-      viewBox="0 0 920 560"
+      viewBox={idPrefix === 'runtime' ? '0 0 920 380' : '0 0 920 560'}
       preserveAspectRatio="xMidYMid meet"
       role="img"
       aria-labelledby={`${idPrefix}-title ${idPrefix}-description`}

@@ -2655,7 +2655,7 @@
   width: min(270px, 35%);
   position: absolute;
   z-index: 1;
-  top: 60%;
+  bottom: 16px;
   left: 64%;
   overflow: hidden;
   color: #cbd7e3;
@@ -2663,7 +2663,6 @@
   border: 1px solid #3b526c;
   border-radius: 6px;
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.52), 0 0 0 1px rgba(109, 145, 180, 0.08);
-  transform: translateY(-50%);
 }
 
 .runtime-action-dialog__titlebar {
