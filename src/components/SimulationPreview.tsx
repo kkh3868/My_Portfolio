@@ -15,8 +15,10 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
   const diagramRef = useRef<SVGSVGElement>(null)
   const [diagramMetrics, setDiagramMetrics] = useState({ width: 920, gridSize: 24 })
   const unitSize = (diagramMetrics.gridSize * 920) / diagramMetrics.width
-  const originX = 20
-  const portY = 20
+  const gridOffsetX = unitSize * 0.5
+  const gridOffsetY = unitSize * -0.5
+  const originX = 20 + gridOffsetX
+  const portY = 20 + gridOffsetY
   const objectSize = unitSize * 2
   const agvY = portY + objectSize + unitSize * 0.75
   const conveyorY = agvY + unitSize + unitSize * 0.75
