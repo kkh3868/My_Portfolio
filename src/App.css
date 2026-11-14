@@ -128,7 +128,7 @@
   max-width: 1320px;
   min-height: 690px;
   margin: 0 auto;
-  padding: 92px 28px 98px;
+  padding: 56px 28px 60px;
   display: grid;
   grid-template-columns: minmax(340px, 0.82fr) minmax(580px, 1.18fr);
   gap: 50px;
@@ -250,7 +250,7 @@
 .hero-visual {
   min-width: 0;
   position: relative;
-  padding: 35px 0;
+  padding: 18px 0;
 }
 
 .visual-orbit {
