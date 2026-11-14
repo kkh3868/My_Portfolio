@@ -32,21 +32,29 @@ function SiteHeader() {
 }
 
 function SiteFooter() {
+  const year = new Date().getFullYear()
+
   return (
     <footer className="site-footer">
-      <a className="site-brand" href="#home">
-        <span className="brand-mark" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-        </span>
-        <span className="brand-copy">
-          <strong>INDUSTRIAL SIMULATION</strong>
-          <small>LOGISTICS &amp; PROCESS FRAMEWORK</small>
-        </span>
-      </a>
-      <span>LOGISTICS &amp; PROCESS SIMULATION FRAMEWORK</span>
-      <a href="#home">BACK TO TOP ↑</a>
+      <div className="site-footer__main">
+        <a className="site-brand" href="#home">
+          <span className="brand-mark" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </span>
+          <span className="brand-copy">
+            <strong>INDUSTRIAL SIMULATION</strong>
+            <small>LOGISTICS &amp; PROCESS FRAMEWORK</small>
+          </span>
+        </a>
+        <span className="site-footer__tagline">LOGISTICS &amp; PROCESS SIMULATION FRAMEWORK</span>
+        <a className="site-footer__top" href="#home">BACK TO TOP ↑</a>
+      </div>
+      <div className="site-footer__legal">
+        <span>© {year} LG CNS · PROPRIETARY SIMULATION SOLUTION</span>
+        <span>DESIGNED &amp; DEVELOPED BY GEONHUI KIM · SENIOR ENGINEER</span>
+      </div>
     </footer>
   )
 }
