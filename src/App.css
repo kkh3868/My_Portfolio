@@ -2573,7 +2573,7 @@
   min-height: 58px;
   padding: 8px 11px;
   display: grid;
-  grid-template-columns: 136px 74px minmax(0, 1fr);
+  grid-template-columns: 136px 92px minmax(0, 1fr);
   align-items: center;
   gap: 10px;
   background: #0c1928;
@@ -2583,9 +2583,16 @@
 .runtime-clock,
 .runtime-speed {
   min-width: 0;
+  min-height: 40px;
+  align-self: stretch;
+  padding: 5px 8px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 3px;
+  background: #0f1c2b;
+  border: 1px solid #22364b;
+  border-radius: 4px;
 }
 
 .runtime-clock small,
@@ -2806,7 +2813,7 @@
   }
 
   .runtime-controlbar {
-    grid-template-columns: 122px 63px minmax(0, 1fr);
+    grid-template-columns: 122px 86px minmax(0, 1fr);
     gap: 6px;
     padding-right: 8px;
     padding-left: 8px;
