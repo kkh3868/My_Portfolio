@@ -226,8 +226,6 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
   const portLabelY = port.border.y + port.border.height + labelOffsetY
   const agvLabelY = agv.border.y + agv.border.height + labelOffsetY
   const conveyorLabelY = conveyors[0].border.y + conveyors[0].border.height + labelOffsetY
-  const conveyorMiddleLabelY =
-    conveyors[1].border.y + conveyors[1].border.height + unitSize * 1.18
   const rackLabelY = rack.border.y + rack.border.height + labelOffsetY
 
   useEffect(() => {
@@ -302,14 +300,14 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
         <rect className="diagram-conveyor__selection" x={conveyors[1].border.x} y={conveyors[1].border.y} width={conveyors[1].border.width} height={conveyors[1].border.height} rx="3" />
       </g>
       <image href={rack.href} x={rack.x} y={rack.y} width={rack.width} height={rack.height} preserveAspectRatio="none" />
-      <g className="diagram-object-label" style={{ fontSize: unitSize * 0.42 }}>
+      <g className="diagram-object-label" style={{ fontSize: unitSize * 0.34 }}>
         <text x={portCenter.x} y={portLabelY} textAnchor="middle">PORT-01</text>
         <text x={agvCenter.x} y={agvLabelY} textAnchor="middle">AGV-01</text>
         {conveyorCenters.map((center, index) => (
           <text
             key={`conveyor-label-${index}`}
             x={center.x}
-            y={index === 1 ? conveyorMiddleLabelY : conveyorLabelY}
+            y={conveyorLabelY}
             textAnchor="middle"
           >
             <tspan x={center.x}>CONVEYOR-</tspan>
