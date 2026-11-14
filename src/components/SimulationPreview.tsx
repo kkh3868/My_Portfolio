@@ -10,15 +10,132 @@ type LayoutDiagramProps = {
   idPrefix: 'modeling' | 'runtime'
 }
 
+type SpriteBorder = {
+  left: number
+  top: number
+  right: number
+  bottom: number
+}
+
+type ModelSprite = {
+  href: string
+  sourceWidth: number
+  sourceHeight: number
+  border: SpriteBorder
+}
+
+const portSprite: ModelSprite = {
+  href: portModel,
+  sourceWidth: 744,
+  sourceHeight: 792,
+  border: { left: 15, top: 140, right: 728, bottom: 777 },
+}
+
+const agvSprite: ModelSprite = {
+  href: agvModel,
+  sourceWidth: 1254,
+  sourceHeight: 1254,
+  border: { left: 272, top: 438, right: 978, bottom: 1036 },
+}
+
+const conveyorSprite: ModelSprite = {
+  href: conveyorModel,
+  sourceWidth: 624,
+  sourceHeight: 610,
+  border: { left: 9, top: 24, right: 613, bottom: 600 },
+}
+
+const conveyorLoadedSprite: ModelSprite = {
+  href: conveyorLoadedModel,
+  sourceWidth: 622,
+  sourceHeight: 610,
+  border: { left: 8, top: 24, right: 612, bottom: 600 },
+}
+
+const rackSprite: ModelSprite = {
+  href: rackModel,
+  sourceWidth: 926,
+  sourceHeight: 882,
+  border: { left: 13, top: 12, right: 913, bottom: 867 },
+}
+
+function getBorderCenter(
+  sprite: ModelSprite,
+  imageX: number,
+  imageY: number,
+  imageWidth: number,
+  imageHeight: number,
+) {
+  const { left, right, top, bottom } = sprite.border
+  return {
+    x: imageX + (((left + right) / 2) / sprite.sourceWidth) * imageWidth,
+    y: imageY + (((top + bottom) / 2) / sprite.sourceHeight) * imageHeight,
+  }
+}
+
+function fitSpriteToBorder(
+  sprite: ModelSprite,
+  center: { x: number; y: number },
+  borderWidth: number,
+  borderHeight: number,
+) {
+  const { left, right, top, bottom } = sprite.border
+  const imageWidth = (borderWidth * sprite.sourceWidth) / (right - left)
+  const imageHeight = (borderHeight * sprite.sourceHeight) / (bottom - top)
+
+  return {
+    href: sprite.href,
+    x: center.x - (((left + right) / 2) / sprite.sourceWidth) * imageWidth,
+    y: center.y - (((top + bottom) / 2) / sprite.sourceHeight) * imageHeight,
+    width: imageWidth,
+    height: imageHeight,
+    border: {
+      x: center.x - borderWidth / 2,
+      y: center.y - borderHeight / 2,
+      width: borderWidth,
+      height: borderHeight,
+    },
+  }
+}
+
+function snapToGrid(value: number, unitSize: number, gridOffset: number) {
+  return Math.round((value + gridOffset) / unitSize) * unitSize - gridOffset
+}
+
+function fitSpriteToGrid(
+  sprite: ModelSprite,
+  center: { x: number; y: number },
+  borderWidth: number,
+  borderHeight: number,
+  unitSize: number,
+  gridOffsetX: number,
+  gridOffsetY: number,
+) {
+  const left = snapToGrid(center.x - borderWidth / 2, unitSize, gridOffsetX)
+  const top = snapToGrid(center.y - borderHeight / 2, unitSize, gridOffsetY)
+  return fitSpriteToBorder(
+    sprite,
+    { x: left + borderWidth / 2, y: top + borderHeight / 2 },
+    borderWidth,
+    borderHeight,
+  )
+}
+
 function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
   const arrowId = `${idPrefix}-arrow`
   const diagramRef = useRef<SVGSVGElement>(null)
-  const [diagramMetrics, setDiagramMetrics] = useState({ width: 920, gridSize: 24 })
+  const [diagramMetrics, setDiagramMetrics] = useState({
+    width: 920,
+    gridSize: 24,
+    offsetX: 9,
+    offsetY: 31,
+  })
+  const { offsetX: gridOffsetX, offsetY: gridOffsetY } = diagramMetrics
   const unitSize = (diagramMetrics.gridSize * 920) / diagramMetrics.width
-  const gridOffsetX = unitSize * 0.5
-  const gridOffsetY = unitSize * -0.5
-  const originX = 20 + gridOffsetX
-  const portY = 20 + gridOffsetY
+  const layoutOffsetX = unitSize * 0.5
+  const layoutOffsetY = unitSize * -0.5
+  const originX = 20 + layoutOffsetX
+  const portY = 20 + layoutOffsetY
   const objectSize = unitSize * 2
   const agvY = portY + objectSize + unitSize * 0.75
   const conveyorY = agvY + unitSize + unitSize * 0.75
@@ -26,12 +143,91 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
   const rackX = originX + objectSize * 3 + unitSize * 0.5
   const rackY = conveyorY - unitSize / 2
   const objectCenterX = originX + unitSize
-  const portCenterY = portY + unitSize
-  const agvCenterY = agvY + unitSize / 2
-  const conveyorCenterY = conveyorY + unitSize
-  const rackCenterX = rackX + unitSize * 1.5
-  const rackCenterY = rackY + unitSize * 1.5
-  const conveyorLabelY = conveyorY + objectSize + unitSize * 0.34
+  const agvX = objectCenterX - unitSize / 2
+
+  const rawPortCenter = getBorderCenter(portSprite, originX, portY, objectSize, objectSize)
+  const port = fitSpriteToGrid(
+    portSprite,
+    rawPortCenter,
+    objectSize,
+    objectSize,
+    unitSize,
+    gridOffsetX,
+    gridOffsetY,
+  )
+  const portCenter = {
+    x: port.border.x + port.border.width / 2,
+    y: port.border.y + port.border.height / 2,
+  }
+
+  const rawAgvCenter = getBorderCenter(agvSprite, agvX, agvY, unitSize, unitSize)
+  const agv = fitSpriteToGrid(
+    agvSprite,
+    rawAgvCenter,
+    unitSize,
+    unitSize,
+    unitSize,
+    gridOffsetX,
+    gridOffsetY,
+  )
+  const agvCenter = {
+    x: agv.border.x + agv.border.width / 2,
+    y: agv.border.y + agv.border.height / 2,
+  }
+
+  const rawConveyorCenter = getBorderCenter(
+    conveyorSprite,
+    conveyorPositions[0],
+    conveyorY,
+    objectSize,
+    objectSize,
+  )
+  const conveyorLeft = snapToGrid(
+    rawConveyorCenter.x - objectSize / 2,
+    unitSize,
+    gridOffsetX,
+  )
+  const conveyorTop = snapToGrid(
+    rawConveyorCenter.y - objectSize / 2,
+    unitSize,
+    gridOffsetY,
+  )
+  const conveyors = conveyorPositions.map((_, index) => {
+    const sprite = index === 1 ? conveyorLoadedSprite : conveyorSprite
+    return fitSpriteToBorder(
+      sprite,
+      {
+        x: conveyorLeft + objectSize / 2 + index * objectSize,
+        y: conveyorTop + objectSize / 2,
+      },
+      objectSize,
+      objectSize,
+    )
+  })
+  const conveyorCenters = conveyors.map((conveyor) => ({
+    x: conveyor.border.x + conveyor.border.width / 2,
+    y: conveyor.border.y + conveyor.border.height / 2,
+  }))
+
+  const rawRackCenter = getBorderCenter(rackSprite, rackX, rackY, unitSize * 3, unitSize * 3)
+  const rack = fitSpriteToGrid(
+    rackSprite,
+    rawRackCenter,
+    unitSize * 3,
+    unitSize * 3,
+    unitSize,
+    gridOffsetX,
+    gridOffsetY,
+  )
+  const rackCenter = {
+    x: rack.border.x + rack.border.width / 2,
+    y: rack.border.y + rack.border.height / 2,
+  }
+
+  const portLabelX = port.border.x + port.border.width + unitSize * 0.22
+  const portLabelY = portCenter.y + unitSize * 0.12
+  const agvLabelY = agv.border.y + agv.border.height + unitSize * 0.42
+  const conveyorLabelY = conveyors[0].border.y + conveyors[0].border.height + unitSize * 0.34
   const conveyorLabelLineHeight = unitSize * 0.45
 
   useEffect(() => {
@@ -43,9 +239,26 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
         const gridSize = Number.parseFloat(
           getComputedStyle(diagram).getPropertyValue('--layout-grid-size'),
         )
+        const diagramRect = diagram.getBoundingClientRect()
+        const parent = diagram.parentElement
+        const parentRect = parent?.getBoundingClientRect()
+        const parentStyle = parent ? getComputedStyle(parent) : null
+        const borderLeft = parentStyle
+          ? Number.parseFloat(parentStyle.borderLeftWidth) || 0
+          : 0
+        const borderTop = parentStyle
+          ? Number.parseFloat(parentStyle.borderTopWidth) || 0
+          : 0
+        const scale = diagramRect.width > 0 ? diagramRect.width / 920 : 1
         setDiagramMetrics({
           width: entry.contentRect.width,
           gridSize: Number.isFinite(gridSize) ? gridSize : 24,
+          offsetX: parentRect
+            ? (diagramRect.left - parentRect.left - borderLeft) / scale
+            : 9,
+          offsetY: parentRect
+            ? (diagramRect.top - parentRect.top - borderTop) / scale
+            : 31,
         })
       }
     })
@@ -80,40 +293,40 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
           <path d="M0 0v8l7-4z" fill="#42c7e8" />
         </marker>
       </defs>
-      <image href={portModel} x={originX} y={portY} width={objectSize} height={objectSize} preserveAspectRatio="none" />
-      <image href={agvModel} x={objectCenterX - unitSize / 2} y={agvY} width={unitSize} height={unitSize} preserveAspectRatio="xMidYMid meet" />
+      <image href={port.href} x={port.x} y={port.y} width={port.width} height={port.height} preserveAspectRatio="none" />
+      <image href={agv.href} x={agv.x} y={agv.y} width={agv.width} height={agv.height} preserveAspectRatio="none" />
       <g className="diagram-conveyor" aria-label="세 개의 연결된 컨베이어 유닛">
-        <image href={conveyorModel} x={conveyorPositions[0]} y={conveyorY} width={objectSize} height={objectSize} preserveAspectRatio="none" />
-        <image href={conveyorLoadedModel} x={conveyorPositions[1]} y={conveyorY} width={objectSize} height={objectSize} preserveAspectRatio="none" />
-        <image href={conveyorModel} x={conveyorPositions[2]} y={conveyorY} width={objectSize} height={objectSize} preserveAspectRatio="none" />
-        <rect className="diagram-conveyor__selection" x={conveyorPositions[1]} y={conveyorY} width={objectSize} height={objectSize} rx="3" />
+        <image href={conveyors[0].href} x={conveyors[0].x} y={conveyors[0].y} width={conveyors[0].width} height={conveyors[0].height} preserveAspectRatio="none" />
+        <image href={conveyors[1].href} x={conveyors[1].x} y={conveyors[1].y} width={conveyors[1].width} height={conveyors[1].height} preserveAspectRatio="none" />
+        <image href={conveyors[2].href} x={conveyors[2].x} y={conveyors[2].y} width={conveyors[2].width} height={conveyors[2].height} preserveAspectRatio="none" />
+        <rect className="diagram-conveyor__selection" x={conveyors[1].border.x} y={conveyors[1].border.y} width={conveyors[1].border.width} height={conveyors[1].border.height} rx="3" />
       </g>
-      <image href={rackModel} x={rackX} y={rackY} width={unitSize * 3} height={unitSize * 3} preserveAspectRatio="none" />
+      <image href={rack.href} x={rack.x} y={rack.y} width={rack.width} height={rack.height} preserveAspectRatio="none" />
       {idPrefix === 'modeling' && (
         <g className="diagram-connection">
-          <path d={`M${objectCenterX} ${portCenterY}L${objectCenterX} ${agvCenterY}`} markerEnd={`url(#${arrowId})`} />
-          <path d={`M${objectCenterX} ${agvCenterY}L${objectCenterX} ${conveyorCenterY}`} markerEnd={`url(#${arrowId})`} />
-          <path d={`M${objectCenterX} ${conveyorCenterY}L${objectCenterX + objectSize} ${conveyorCenterY}`} markerEnd={`url(#${arrowId})`} />
-          <path d={`M${objectCenterX + objectSize} ${conveyorCenterY}L${objectCenterX + objectSize * 2} ${conveyorCenterY}`} markerEnd={`url(#${arrowId})`} />
-          <path d={`M${objectCenterX + objectSize * 2} ${conveyorCenterY}L${rackCenterX} ${rackCenterY}`} markerEnd={`url(#${arrowId})`} />
+          <path d={`M${portCenter.x} ${port.border.y + port.border.height}L${portCenter.x} ${agvCenter.y}`} markerEnd={`url(#${arrowId})`} />
+          <path d={`M${portCenter.x} ${agvCenter.y}L${portCenter.x} ${conveyorCenters[0].y}`} markerEnd={`url(#${arrowId})`} />
+          <path d={`M${conveyorCenters[0].x} ${conveyorCenters[0].y}L${conveyorCenters[1].x} ${conveyorCenters[1].y}`} markerEnd={`url(#${arrowId})`} />
+          <path d={`M${conveyorCenters[1].x} ${conveyorCenters[1].y}L${conveyorCenters[2].x} ${conveyorCenters[2].y}`} markerEnd={`url(#${arrowId})`} />
+          <path d={`M${conveyorCenters[2].x} ${conveyorCenters[2].y}L${rackCenter.x} ${rackCenter.y}`} markerEnd={`url(#${arrowId})`} />
         </g>
       )}
       <g className="diagram-object-label">
-        <text x={objectCenterX} y={portY - 7} textAnchor="middle">PORT-01</text>
-        <text x={objectCenterX} y={agvY + unitSize + unitSize * 0.42} textAnchor="middle">AGV-01</text>
-        <text x={conveyorPositions[0] + unitSize} y={conveyorLabelY} textAnchor="middle" style={{ fontSize: unitSize * 0.32 }}>
-          <tspan x={conveyorPositions[0] + unitSize}>CONVEYOR-</tspan>
-          <tspan x={conveyorPositions[0] + unitSize} dy={conveyorLabelLineHeight}>01</tspan>
+        <text x={portLabelX} y={portLabelY} textAnchor="start">PORT-01</text>
+        <text x={agvCenter.x} y={agvLabelY} textAnchor="middle">AGV-01</text>
+        <text x={conveyorCenters[0].x} y={conveyorLabelY} textAnchor="middle" style={{ fontSize: unitSize * 0.32 }}>
+          <tspan x={conveyorCenters[0].x}>CONVEYOR-</tspan>
+          <tspan x={conveyorCenters[0].x} dy={conveyorLabelLineHeight}>01</tspan>
         </text>
-        <text x={conveyorPositions[1] + unitSize} y={conveyorLabelY} textAnchor="middle" style={{ fontSize: unitSize * 0.32 }}>
-          <tspan x={conveyorPositions[1] + unitSize}>CONVEYOR-</tspan>
-          <tspan x={conveyorPositions[1] + unitSize} dy={conveyorLabelLineHeight}>02</tspan>
+        <text x={conveyorCenters[1].x} y={conveyorLabelY} textAnchor="middle" style={{ fontSize: unitSize * 0.32 }}>
+          <tspan x={conveyorCenters[1].x}>CONVEYOR-</tspan>
+          <tspan x={conveyorCenters[1].x} dy={conveyorLabelLineHeight}>02</tspan>
         </text>
-        <text x={conveyorPositions[2] + unitSize} y={conveyorLabelY} textAnchor="middle" style={{ fontSize: unitSize * 0.32 }}>
-          <tspan x={conveyorPositions[2] + unitSize}>CONVEYOR-</tspan>
-          <tspan x={conveyorPositions[2] + unitSize} dy={conveyorLabelLineHeight}>03</tspan>
+        <text x={conveyorCenters[2].x} y={conveyorLabelY} textAnchor="middle" style={{ fontSize: unitSize * 0.32 }}>
+          <tspan x={conveyorCenters[2].x}>CONVEYOR-</tspan>
+          <tspan x={conveyorCenters[2].x} dy={conveyorLabelLineHeight}>03</tspan>
         </text>
-        <text x={rackX} y={rackY - 7}>RACK-01</text>
+        <text x={rack.border.x} y={rack.border.y - 7}>RACK-01</text>
       </g>
     </svg>
   )
