@@ -2486,10 +2486,11 @@
 }
 
 .diagram-object-label {
-  fill: #8199b3;
+  fill: #cbdced;
   font-family: var(--mono);
-  font-size: 13px;
-  letter-spacing: 0.06em;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 .diagram-object-label text {
@@ -2499,13 +2500,6 @@
   stroke-linejoin: round;
 }
 
-.diagram-object-label text:first-child {
-  fill: #e8ba72;
-}
-
-.diagram-object-label text:last-child {
-  fill: #9db8d0;
-}
 
 .diagram-conveyor__selection {
   fill: none;
@@ -2922,11 +2916,6 @@
 
 .simulation-screen--modeling .screen-layout__heading {
   color: #a0b6ca;
-}
-
-.layout-diagram--modeler .diagram-object-label {
-  font-size: 15px;
-  font-weight: 600;
 }
 
 @media (prefers-reduced-motion: reduce) {

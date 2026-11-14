@@ -26,9 +26,9 @@ type ModelSprite = {
 
 const portSprite: ModelSprite = {
   href: portModel,
-  sourceWidth: 744,
-  sourceHeight: 792,
-  border: { left: 15, top: 140, right: 728, bottom: 777 },
+  sourceWidth: 714,
+  sourceHeight: 638,
+  border: { left: 0, top: 0, right: 714, bottom: 638 },
 }
 
 const agvSprite: ModelSprite = {
@@ -132,10 +132,8 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
   })
   const { offsetX: gridOffsetX, offsetY: gridOffsetY } = diagramMetrics
   const unitSize = (diagramMetrics.gridSize * 920) / diagramMetrics.width
-  const layoutOffsetX = unitSize * 0.5
-  const layoutOffsetY = unitSize * -0.5
-  const originX = 20 + layoutOffsetX
-  const portY = 20 + layoutOffsetY
+  const originX = unitSize
+  const portY = unitSize
   const objectSize = unitSize * 2
   const agvY = portY + objectSize + unitSize * 0.75
   const conveyorY = agvY + unitSize + unitSize * 0.75
@@ -224,11 +222,13 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
     y: rack.border.y + rack.border.height / 2,
   }
 
-  const portLabelX = port.border.x + port.border.width + unitSize * 0.22
-  const portLabelY = portCenter.y + unitSize * 0.12
-  const agvLabelY = agv.border.y + agv.border.height + unitSize * 0.42
-  const conveyorLabelY = conveyors[0].border.y + conveyors[0].border.height + unitSize * 0.34
-  const conveyorLabelLineHeight = unitSize * 0.45
+  const labelOffsetY = unitSize * 0.36
+  const portLabelY = port.border.y + port.border.height + labelOffsetY
+  const agvLabelY = agv.border.y + agv.border.height + labelOffsetY
+  const conveyorLabelY = conveyors[0].border.y + conveyors[0].border.height + labelOffsetY
+  const conveyorMiddleLabelY =
+    conveyors[1].border.y + conveyors[1].border.height + unitSize * 1.18
+  const rackLabelY = rack.border.y + rack.border.height + labelOffsetY
 
   useEffect(() => {
     const diagram = diagramRef.current
@@ -302,32 +302,31 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
         <rect className="diagram-conveyor__selection" x={conveyors[1].border.x} y={conveyors[1].border.y} width={conveyors[1].border.width} height={conveyors[1].border.height} rx="3" />
       </g>
       <image href={rack.href} x={rack.x} y={rack.y} width={rack.width} height={rack.height} preserveAspectRatio="none" />
+      <g className="diagram-object-label" style={{ fontSize: unitSize * 0.42 }}>
+        <text x={portCenter.x} y={portLabelY} textAnchor="middle">PORT-01</text>
+        <text x={agvCenter.x} y={agvLabelY} textAnchor="middle">AGV-01</text>
+        {conveyorCenters.map((center, index) => (
+          <text
+            key={`conveyor-label-${index}`}
+            x={center.x}
+            y={index === 1 ? conveyorMiddleLabelY : conveyorLabelY}
+            textAnchor="middle"
+          >
+            <tspan x={center.x}>CONVEYOR-</tspan>
+            <tspan x={center.x} dy="1.15em">{`0${index + 1}`}</tspan>
+          </text>
+        ))}
+        <text x={rackCenter.x} y={rackLabelY} textAnchor="middle">RACK-01</text>
+      </g>
       {idPrefix === 'modeling' && (
         <g className="diagram-connection">
-          <path d={`M${portCenter.x} ${port.border.y + port.border.height}L${portCenter.x} ${agvCenter.y}`} markerEnd={`url(#${arrowId})`} />
-          <path d={`M${portCenter.x} ${agvCenter.y}L${portCenter.x} ${conveyorCenters[0].y}`} markerEnd={`url(#${arrowId})`} />
+          <path d={`M${portCenter.x} ${portCenter.y}L${agvCenter.x} ${agvCenter.y}`} markerEnd={`url(#${arrowId})`} />
+          <path d={`M${agvCenter.x} ${agvCenter.y}L${conveyorCenters[0].x} ${conveyorCenters[0].y}`} markerEnd={`url(#${arrowId})`} />
           <path d={`M${conveyorCenters[0].x} ${conveyorCenters[0].y}L${conveyorCenters[1].x} ${conveyorCenters[1].y}`} markerEnd={`url(#${arrowId})`} />
           <path d={`M${conveyorCenters[1].x} ${conveyorCenters[1].y}L${conveyorCenters[2].x} ${conveyorCenters[2].y}`} markerEnd={`url(#${arrowId})`} />
           <path d={`M${conveyorCenters[2].x} ${conveyorCenters[2].y}L${rackCenter.x} ${rackCenter.y}`} markerEnd={`url(#${arrowId})`} />
         </g>
       )}
-      <g className="diagram-object-label">
-        <text x={portLabelX} y={portLabelY} textAnchor="start">PORT-01</text>
-        <text x={agvCenter.x} y={agvLabelY} textAnchor="middle">AGV-01</text>
-        <text x={conveyorCenters[0].x} y={conveyorLabelY} textAnchor="middle" style={{ fontSize: unitSize * 0.32 }}>
-          <tspan x={conveyorCenters[0].x}>CONVEYOR-</tspan>
-          <tspan x={conveyorCenters[0].x} dy={conveyorLabelLineHeight}>01</tspan>
-        </text>
-        <text x={conveyorCenters[1].x} y={conveyorLabelY} textAnchor="middle" style={{ fontSize: unitSize * 0.32 }}>
-          <tspan x={conveyorCenters[1].x}>CONVEYOR-</tspan>
-          <tspan x={conveyorCenters[1].x} dy={conveyorLabelLineHeight}>02</tspan>
-        </text>
-        <text x={conveyorCenters[2].x} y={conveyorLabelY} textAnchor="middle" style={{ fontSize: unitSize * 0.32 }}>
-          <tspan x={conveyorCenters[2].x}>CONVEYOR-</tspan>
-          <tspan x={conveyorCenters[2].x} dy={conveyorLabelLineHeight}>03</tspan>
-        </text>
-        <text x={rack.border.x} y={rack.border.y - 7}>RACK-01</text>
-      </g>
     </svg>
   )
 }
