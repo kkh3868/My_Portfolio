@@ -43,10 +43,6 @@ export function HeroSection() {
           </div>
         </div>
       </div>
-      <div className="hero-bottom">
-        <span>LOGISTICS &amp; PROCESS SIMULATION FRAMEWORK</span>
-        <span>01 — 05 <i /></span>
-      </div>
     </section>
   )
 }
