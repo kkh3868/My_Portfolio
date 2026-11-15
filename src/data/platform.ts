@@ -79,7 +79,7 @@ export const platformCapabilities: PlatformCapability[] = [
     title: 'C# Model Development',
     description:
       'Base Model의 공통 이벤트와 공통 로직을 활용해 현장별 물류·공정 모델을 C#으로 개발할 수 있습니다.',
-    icon: 'flow',
+    icon: 'document',
     number: '06',
   },
 ]

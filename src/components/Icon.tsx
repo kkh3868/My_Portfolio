@@ -43,6 +43,12 @@ const icons: Record<IconName, ReactNode> = {
       <path d="m15 17 2 2-2 2" />
     </>
   ),
+  document: (
+    <>
+      <path d="M7 3.5h7l4 4v13H7a1 1 0 0 1-1-1v-15a1 1 0 0 1 1-1Z" />
+      <path d="M14 3.5v4h4M9 12h6M9 15.5h6M9 19h4" />
+    </>
+  ),
 }
 
 interface IconProps {

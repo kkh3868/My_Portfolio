@@ -5,6 +5,7 @@ export type IconName =
   | 'objects'
   | 'framework'
   | 'flow'
+  | 'document'
 
 export interface PlatformComponent {
   number: string
