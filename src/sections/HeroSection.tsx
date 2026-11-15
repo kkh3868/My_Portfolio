@@ -10,7 +10,7 @@ export function HeroSection() {
             <span>SIMULATION FRAMEWORK</span>
             <span>DISCRETE EVENT SIMULATION</span>
           </div>
-          <h1>물류와 공정의 흐름을<br /><span>하나의 프레임워크</span>로<br />모델링하고 검증하다.</h1>
+          <h1>물류와 공정의 흐름을<br /><span>시뮬레이션</span>으로<br />모델링하고 검증하다.</h1>
           <p className="hero-description">
             제조 현장의 물류·공정을 2D 모델로 구성하고, 시뮬레이션 엔진과 런타임 제어를
             연결하는 프레임워크를 설계·개발합니다. 설비와 물류 객체를 확장하고 흐름을
