@@ -72,11 +72,8 @@ function SiteFooter() {
         </figure>
       </div>
       <div className="site-footer__legal">
-        <span>© {year} GEONHUI KIM · INDUSTRIAL SIMULATION FRAMEWORK</span>
-        <div className="site-footer__legal-right">
-          <span>ENGINEERED BY G. KIM</span>
-          <a className="site-footer__top" href="#home">BACK TO TOP ↑</a>
-        </div>
+        <span>© {year} GEONHUI KIM · ALL RIGHTS RESERVED</span>
+        <a className="site-footer__top" href="#home">BACK TO TOP ↑</a>
       </div>
     </footer>
   )
