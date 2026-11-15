@@ -278,12 +278,6 @@
   color: var(--blue-400);
 }
 
-.vision-caption__line {
-  width: 30px;
-  height: 1px;
-  background: var(--blue-500);
-}
-
 .hero-visual {
   min-width: 0;
   position: relative;
@@ -1739,40 +1733,28 @@
 }
 
 .vision-section {
-  min-height: 410px;
+  min-height: 360px;
   position: relative;
   overflow: hidden;
   display: grid;
   place-items: center;
   color: #ffffff;
   background:
-    radial-gradient(ellipse at 50% 30%, rgba(23, 86, 145, 0.3), transparent 58%),
+    radial-gradient(ellipse at 78% 50%, rgba(23, 86, 145, 0.16), transparent 52%),
     #091626;
   border-top: 1px solid #182a3e;
 }
 
-.vision-grid {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  opacity: 0.32;
-  pointer-events: none;
-}
-
-.vision-grid span {
-  border-right: 1px solid rgba(107, 151, 194, 0.1);
-}
-
-.vision-grid span:nth-child(3n) {
-  background: linear-gradient(180deg, transparent, rgba(42, 105, 163, 0.09), transparent);
-}
-
 .vision-content {
-  max-width: 760px;
-  padding: 83px 24px 77px;
+  width: min(1264px, 100%);
+  padding: 78px 28px;
   position: relative;
-  text-align: center;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(42px, 7vw, 104px);
+  box-sizing: border-box;
+  text-align: left;
 }
 
 .vision-content .eyebrow {
@@ -1780,52 +1762,55 @@
 }
 
 .vision-content h2 {
-  margin: 14px 0 14px;
+  max-width: 520px;
+  margin: 16px 0 14px;
   color: #f5f8fc;
-  font-size: clamp(calc(31px + var(--font-size-increase)), calc(4vw + var(--font-size-increase)), calc(43px + var(--font-size-increase)));
+  font-size: clamp(calc(29px + var(--font-size-increase)), calc(3.2vw + var(--font-size-increase)), calc(40px + var(--font-size-increase)));
   font-weight: 600;
+  line-height: 1.42;
   letter-spacing: -0.05em;
+  word-break: keep-all;
 }
 
-.vision-content > p {
-  max-width: 630px;
-  margin: 0 auto;
+.vision-copy > p {
+  max-width: 540px;
+  margin: 0;
   color: #aab9c9;
-  font-size: calc(13px + var(--font-size-increase));
+  font-size: calc(12px + var(--font-size-increase));
   line-height: 1.9;
   word-break: keep-all;
 }
 
 .vision-statement {
-  margin-top: 34px;
-  display: flex;
-  justify-content: center;
-  gap: 18px;
-  color: #edf6ff;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  color: #dce7f1;
   font-family: var(--mono);
-  font-size: clamp(calc(15px + var(--font-size-increase)), calc(2.2vw + var(--font-size-increase)), calc(21px + var(--font-size-increase)));
+  font-size: clamp(calc(12px + var(--font-size-increase)), calc(1.5vw + var(--font-size-increase)), calc(20px + var(--font-size-increase)));
   font-weight: 550;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.08em;
+}
+
+.vision-statement span {
+  min-width: 0;
+  min-height: 100px;
+  padding: 16px 12px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #2a4057;
+  border-bottom: 1px solid #2a4057;
+  border-left: 1px solid #2a4057;
+  white-space: nowrap;
+}
+
+.vision-statement span:last-child {
+  border-right: 1px solid #2a4057;
 }
 
 .vision-statement span:nth-child(2) {
   color: #82c5fb;
-}
-
-.vision-caption {
-  margin-top: 29px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  color: #7288a0;
-  font-family: var(--mono);
-  font-size: calc(7px + var(--font-size-increase));
-  letter-spacing: 0.14em;
-}
-
-.vision-caption__line {
-  width: 20px;
+  background: rgba(57, 134, 194, 0.07);
 }
 
 .site-footer {
@@ -1969,6 +1954,15 @@
 
   .section-shell {
     padding: 82px 26px;
+  }
+
+  .vision-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .vision-statement {
+    max-width: 760px;
   }
 
   .features-section .section-heading p {
@@ -2400,24 +2394,24 @@
 
   .vision-content {
     padding: 66px 20px;
+    gap: 26px;
   }
 
   .vision-content h2 {
     font-size: calc(31px + var(--font-size-increase));
   }
 
-  .vision-content > p {
+  .vision-copy > p {
     font-size: calc(11px + var(--font-size-increase));
   }
 
-  .vision-statement {
-    gap: 10px;
-    font-size: clamp(calc(12px + var(--font-size-increase)), calc(3.4vw + var(--font-size-increase)), calc(17px + var(--font-size-increase)));
+  .vision-statement span {
+    min-height: 72px;
+    padding: 12px 8px;
   }
 
-  .vision-caption {
-    font-size: calc(5px + var(--font-size-increase));
-    letter-spacing: 0.08em;
+  .vision-statement {
+    font-size: clamp(calc(10px + var(--font-size-increase)), calc(2vw + var(--font-size-increase)), calc(16px + var(--font-size-increase)));
   }
 
   .site-footer {
