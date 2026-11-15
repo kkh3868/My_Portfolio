@@ -14,10 +14,10 @@ function SiteHeader() {
           <span />
           <span />
         </span>
-        <span className="brand-copy">
-          <strong>INDUSTRIAL SIMULATION</strong>
-          <small>LOGISTICS &amp; PROCESS FRAMEWORK</small>
-        </span>
+          <span className="brand-copy">
+            <strong>INDUSTRIAL SIMULATION</strong>
+            <small>FOR LOGISTICS &amp; PROCESS</small>
+          </span>
       </a>
       <nav className="main-nav" aria-label="주요 메뉴">
         <a href="#platform">Platform</a>
@@ -45,15 +45,15 @@ function SiteFooter() {
           </span>
           <span className="brand-copy">
             <strong>INDUSTRIAL SIMULATION</strong>
-            <small>LOGISTICS &amp; PROCESS FRAMEWORK</small>
+          <small>FOR LOGISTICS &amp; PROCESS</small>
           </span>
         </a>
         <span className="site-footer__tagline">LOGISTICS &amp; PROCESS SIMULATION FRAMEWORK</span>
         <a className="site-footer__top" href="#home">BACK TO TOP ↑</a>
       </div>
       <div className="site-footer__legal">
-        <span>© {year} LG CNS · PROPRIETARY SIMULATION SOLUTION</span>
-        <span>DESIGNED &amp; DEVELOPED BY GEONHUI KIM · SENIOR ENGINEER</span>
+        <span>© {year} GEONHUI KIM · INDUSTRIAL SIMULATION FRAMEWORK</span>
+        <span>ENGINEED BY G. KIM</span>
       </div>
     </footer>
   )
