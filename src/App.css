@@ -1889,6 +1889,11 @@
   stroke-linejoin: round;
 }
 
+.site-footer__contacts .site-footer__brand-icon {
+  fill: currentColor;
+  stroke: none;
+}
+
 .site-footer__portrait {
   width: min(100%, 280px);
   aspect-ratio: 1;
@@ -1908,6 +1913,7 @@
   height: 100%;
   display: block;
   object-fit: cover;
+  object-position: center 45%;
   border-radius: 50%;
 }
 
