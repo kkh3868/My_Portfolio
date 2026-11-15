@@ -3015,9 +3015,10 @@
   }
 
   .runtime-action-dialog {
-    width: calc(50% - 8px);
-    top: 62%;
-    left: 48%;
+    width: 100%;
+    position: relative;
+    inset: auto;
+    margin-top: 12px;
   }
 
   .simulation-screen__footer > span:last-child {
