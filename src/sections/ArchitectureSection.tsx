@@ -6,13 +6,13 @@ export function ArchitectureSection() {
     <section className="architecture-section" id="architecture">
       <div className="section-shell architecture-shell">
         <SectionHeading
-          eyebrow="SYSTEM ARCHITECTURE"
-          title="A Clear, Modular Architecture"
-          description="각 구성요소의 역할을 분리하고 유기적으로 연결하여 확장 가능한 시뮬레이션 환경을 구성합니다."
+          eyebrow="FRAMEWORK ARCHITECTURE"
+          title="Three Components, One Workflow"
+          description="모델링 서버, 시뮬레이션 엔진, 런타임 제어 UI의 역할과 모델 데이터·실행 상태의 흐름을 개념적으로 보여줍니다."
         />
         <div className="architecture-panel">
           <div className="architecture-panel__header">
-            <span>WORKFLOW OVERVIEW</span>
+            <span>FRAMEWORK WORKFLOW</span>
             <span><i /> COMPONENT RESPONSIBILITIES</span>
           </div>
           <div className="architecture-flow">
@@ -20,9 +20,9 @@ export function ArchitectureSection() {
               <span className="node-index">01</span>
               <span className="node-icon"><Icon name="layout" size={21} /></span>
               <span className="node-content">
-                <small>INDEPENDENT SERVER</small>
+                <small>MODELING SERVER</small>
                 <strong>Modeler Server</strong>
-                <span>2D model authoring</span>
+                <span>2D model design</span>
               </span>
             </article>
             <div className="flow-connector">
@@ -34,9 +34,9 @@ export function ArchitectureSection() {
               <span className="node-index">02</span>
               <span className="node-icon"><Icon name="engine" size={21} /></span>
               <span className="node-content">
-                <small>INDEPENDENT SERVER</small>
+                <small>ENGINE SERVER</small>
                 <strong>Simulation Engine</strong>
-                <span>Discrete event execution</span>
+                <span>Discrete-event simulation</span>
               </span>
             </article>
             <div className="flow-connector">
@@ -50,14 +50,14 @@ export function ArchitectureSection() {
               <span className="node-content">
                 <small>USER INTERFACE</small>
                 <strong>Runtime Monitoring &amp; Control UI</strong>
-                <span>Monitor and control simulation</span>
+                <span>Runtime monitoring &amp; control</span>
               </span>
             </article>
           </div>
           <div className="architecture-panel__footer">
             <span><i className="server-key" /> 서버 구성요소</span>
             <span><i className="ui-key" /> 사용자 인터페이스</span>
-            <span className="architecture-disclaimer">개념적 구성도 · 통신 방식 미표현</span>
+            <span className="architecture-disclaimer">개념도 · 통신 방식 미표현</span>
           </div>
         </div>
       </div>

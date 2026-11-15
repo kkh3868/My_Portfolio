@@ -372,11 +372,11 @@ export function SimulationPreview() {
         </div>
       </section>
 
-      <section className="simulation-screen simulation-screen--runtime" aria-label="시뮬레이션 제어 화면 예시">
+      <section className="simulation-screen simulation-screen--runtime" aria-label="런타임 제어 화면 예시">
         <div className="simulation-screen__header">
           <div className="screen-title">
             <span className="screen-title__mark screen-title__mark--runtime">▶</span>
-            <strong>SIMULATION CONTROL UI</strong>
+            <strong>RUNTIME CONTROL UI</strong>
           </div>
           <span className="runtime-live"><i className="status-dot" /> RUNNING</span>
         </div>

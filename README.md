@@ -1,16 +1,16 @@
 # My Portfolio
 
-> **Simulation Solution Engineer | Backend Developer | Digital Twin**
+> **Industrial Simulation Framework Engineer | Backend Developer | Digital Twin**
 
-산업용 공정 및 물류 시뮬레이션 솔루션을 개발하는 엔지니어입니다.
+산업용 공정 및 물류 시뮬레이션 프레임워크를 설계·개발하는 엔지니어입니다.
 
-제조 환경의 Digital Twin과 Discrete Event Simulation을 기반으로 모델링, 시뮬레이션 엔진, 런타임 제어 시스템을 개발하며, 확장 가능한 시뮬레이션 프레임워크 설계를 지향합니다.
+모델링 서버, 시뮬레이션 엔진, 런타임 제어 UI와 Base Model을 제공해 모델 개발부터 실행과 검증까지 지원하는 프레임워크를 만듭니다.
 
 ---
 
 ## About Me
 
-- Industrial Simulation Solution Engineer
+- Industrial Simulation Framework Engineer
 - Backend Developer
 - Digital Twin & Smart Factory
 - Manufacturing & Logistics Simulation
@@ -43,8 +43,8 @@
 
 ## Vision
 
-현실의 공장과 물류 시스템을 소프트웨어로 재현하고 검증할 수 있는 시뮬레이션 플랫폼을 만드는 개발자를 목표로 합니다.
+현실의 공장과 물류 시스템을 모델링하고 시뮬레이션으로 검증할 수 있는 산업용 프레임워크를 설계합니다.
 
 ---
 
-*"Model. Simulate. Optimize."*
+*"Model. Simulate. Validate."*

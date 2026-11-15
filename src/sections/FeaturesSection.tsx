@@ -6,16 +6,16 @@ export function FeaturesSection() {
   return (
     <section className="features-section section-shell" id="features">
       <SectionHeading
-        eyebrow="ENGINEERING PRINCIPLES"
-        title="Built for Industrial Simulation"
-        description="산업 시스템의 구조와 흐름을 명확하게 표현하기 위한 핵심 설계 원칙입니다."
+        eyebrow="FRAMEWORK CAPABILITIES"
+        title="Designed for Industrial Simulation"
+        description="객체 기반 모델링, Base Model 기반 개발, 2D 흐름 시각화를 통해 현장별 시뮬레이션 모델을 구성합니다."
       />
       <div className="capability-grid">
         {platformCapabilities.map((capability) => (
           <article className="capability-card" key={capability.number}>
             <div className="capability-card__top">
               <span className="icon-tile icon-tile--subtle"><Icon name={capability.icon} /></span>
-              <span>{capability.number} / PRINCIPLE</span>
+              <span>{capability.number} / CAPABILITY</span>
             </div>
             <h3>{capability.title}</h3>
             <p>{capability.description}</p>

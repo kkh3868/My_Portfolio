@@ -7,9 +7,8 @@ export function HeroSection() {
         <div className="hero-copy">
           <h1>물류와 공정의 흐름을<br /><span>시뮬레이션</span>으로<br />모델링하고 검증하다.</h1>
           <p className="hero-description">
-            제조 현장의 물류·공정을 2D 모델로 구성하고, 시뮬레이션 엔진과 런타임 제어를
-            연결하는 프레임워크를 설계·개발합니다. 설비와 물류 객체를 확장하고 흐름을
-            검증할 수 있는 기반을 만듭니다.
+            모델링 서버와 시뮬레이션 엔진, 런타임 제어 UI를 제공하며 Base Model을 기반으로
+            C# 모델의 개발과 실행을 지원합니다.
           </p>
           <div className="hero-stats" aria-label="현장 검증 실적">
             <div className="hero-stat">

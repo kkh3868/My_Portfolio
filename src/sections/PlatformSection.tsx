@@ -6,9 +6,9 @@ export function PlatformSection() {
   return (
     <section className="platform-section section-shell" id="platform">
       <SectionHeading
-        eyebrow="THE PLATFORM"
-        title="One Platform, Three Core Components"
-        description="모델링부터 시뮬레이션 실행과 제어까지, 하나의 워크플로우로 연결되는 통합 시뮬레이션 플랫폼입니다."
+        eyebrow="THE FRAMEWORK"
+        title="Three Components. One Framework."
+        description="모델링 서버·시뮬레이션 엔진·런타임 제어 UI와 Base Model을 제공해 모델 개발부터 실행과 검증까지 지원합니다."
       />
       <div className="component-grid">
         {platformComponents.map((component) => (
@@ -32,8 +32,8 @@ export function PlatformSection() {
       </div>
       <div className="platform-footnote">
         <span className="footnote-mark">i</span>
-        <p>각 구성요소는 역할에 따라 분리되며, 하나의 시뮬레이션 워크플로우를 이룹니다.</p>
-        <a href="#architecture">아키텍처 보기 <span aria-hidden="true">→</span></a>
+        <p>Base Model은 공통 이벤트와 헬퍼 함수를 제공하며, 이를 바탕으로 C# 모델을 구현할 수 있습니다.</p>
+        <a href="#architecture">구성도 보기 <span aria-hidden="true">→</span></a>
       </div>
     </section>
   )
