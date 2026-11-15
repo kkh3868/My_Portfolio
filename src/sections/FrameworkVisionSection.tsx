@@ -1,4 +1,4 @@
-export function VisionSection() {
+export function FrameworkVisionSection() {
   return (
     <section className="vision-section" id="vision">
       <div className="vision-grid" aria-hidden="true">

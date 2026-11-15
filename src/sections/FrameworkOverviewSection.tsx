@@ -2,7 +2,7 @@ import { Icon } from '../components/Icon'
 import { SectionHeading } from '../components/SectionHeading'
 import { platformComponents } from '../data/platform'
 
-export function PlatformSection() {
+export function FrameworkOverviewSection() {
   return (
     <section className="platform-section section-shell" id="platform">
       <SectionHeading

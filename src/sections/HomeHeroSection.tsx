@@ -1,6 +1,6 @@
 import { SimulationPreview } from '../components/SimulationPreview'
 
-export function HeroSection() {
+export function HomeHeroSection() {
   return (
     <section className="hero-section" id="home">
       <div className="hero-inner">

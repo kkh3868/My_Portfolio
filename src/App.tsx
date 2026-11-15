@@ -1,8 +1,8 @@
-import { ArchitectureSection } from './sections/ArchitectureSection'
-import { FeaturesSection } from './sections/FeaturesSection'
-import { HeroSection } from './sections/HeroSection'
-import { PlatformSection } from './sections/PlatformSection'
-import { VisionSection } from './sections/VisionSection'
+import { FrameworkArchitectureSection } from './sections/FrameworkArchitectureSection'
+import { FrameworkCapabilitiesSection } from './sections/FrameworkCapabilitiesSection'
+import { FrameworkOverviewSection } from './sections/FrameworkOverviewSection'
+import { FrameworkVisionSection } from './sections/FrameworkVisionSection'
+import { HomeHeroSection } from './sections/HomeHeroSection'
 import './App.css'
 
 function SiteHeader() {
@@ -63,11 +63,11 @@ function App() {
   return (
     <main>
       <SiteHeader />
-      <HeroSection />
-      <PlatformSection />
-      <ArchitectureSection />
-      <FeaturesSection />
-      <VisionSection />
+      <HomeHeroSection />
+      <FrameworkOverviewSection />
+      <FrameworkArchitectureSection />
+      <FrameworkCapabilitiesSection />
+      <FrameworkVisionSection />
       <SiteFooter />
     </main>
   )

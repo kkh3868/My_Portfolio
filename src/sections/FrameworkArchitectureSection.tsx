@@ -1,7 +1,7 @@
 import { Icon } from '../components/Icon'
 import { SectionHeading } from '../components/SectionHeading'
 
-export function ArchitectureSection() {
+export function FrameworkArchitectureSection() {
   return (
     <section className="architecture-section" id="architecture">
       <div className="section-shell architecture-shell">
