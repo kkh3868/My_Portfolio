@@ -129,18 +129,19 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
     gridSize: 24,
     offsetX: 9,
     offsetY: 31,
-    isCompact: false,
+    isCompact:
+      typeof window !== 'undefined' &&
+      window.matchMedia('(max-width: 620px)').matches,
   })
   const { offsetX: gridOffsetX, offsetY: gridOffsetY } = diagramMetrics
   const { isCompact } = diagramMetrics
   const unitSize = (diagramMetrics.gridSize * 920) / diagramMetrics.width
-  const compactViewBoxWidth = unitSize * 11.5
-  const compactViewBoxHeight = unitSize * 9.5
+  const gridBasedViewBoxHeight = unitSize * 9.5
   const originX = unitSize
   const portY = unitSize
   const objectSize = unitSize * 2
   const agvY = portY + objectSize + unitSize * 0.75
-  const conveyorY = agvY + unitSize + unitSize * (isCompact ? 1.1 : 0.75)
+  const conveyorY = agvY + unitSize + unitSize * 0.75
   const conveyorPositions = [originX, originX + objectSize, originX + objectSize * 2]
   const rackX = originX + objectSize * 3 + unitSize * 0.5
   const rackY = conveyorY - unitSize / 2
@@ -240,13 +241,24 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
     const updateCompactLayout = () => {
       setDiagramMetrics((current) => ({ ...current, isCompact: compactQuery.matches }))
     }
+    updateCompactLayout()
     const observer = new ResizeObserver(([entry]) => {
-      if (entry) {
-        const gridSize = Number.parseFloat(
-          getComputedStyle(diagram).getPropertyValue('--layout-grid-size'),
-        )
-        const diagramRect = diagram.getBoundingClientRect()
+      const diagramWidth = entry?.contentRect.width ?? 0
+      if (diagramWidth > 0) {
         const parent = diagram.parentElement
+        const gridSize = compactQuery.matches
+          ? Math.min(24, diagramWidth / 10.8)
+          : Number.parseFloat(
+            getComputedStyle(diagram).getPropertyValue('--layout-grid-size'),
+          )
+        if (parent) {
+          if (compactQuery.matches) {
+            parent.style.setProperty('--layout-grid-size', `${gridSize}px`)
+          } else {
+            parent.style.removeProperty('--layout-grid-size')
+          }
+        }
+        const diagramRect = diagram.getBoundingClientRect()
         const parentRect = parent?.getBoundingClientRect()
         const parentStyle = parent ? getComputedStyle(parent) : null
         const borderLeft = parentStyle
@@ -257,7 +269,7 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
           : 0
         const scale = diagramRect.width > 0 ? diagramRect.width / 920 : 1
         setDiagramMetrics({
-          width: entry.contentRect.width,
+          width: diagramWidth,
           gridSize: Number.isFinite(gridSize) ? gridSize : 24,
           offsetX: parentRect
             ? (diagramRect.left - parentRect.left - borderLeft) / scale
@@ -315,10 +327,10 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
       className={`layout-diagram${idPrefix === 'modeling' ? ' layout-diagram--modeler' : ''}`}
       viewBox={
         isCompact
-          ? `0 0 ${compactViewBoxWidth} ${compactViewBoxHeight}`
+          ? `0 0 920 ${gridBasedViewBoxHeight}`
           : idPrefix === 'runtime'
             ? '0 0 920 380'
-            : '0 0 920 560'
+            : `0 0 920 ${Math.max(560, gridBasedViewBoxHeight)}`
       }
       preserveAspectRatio="xMidYMid meet"
       role="img"

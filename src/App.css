@@ -3038,7 +3038,7 @@
 @media (max-width: 620px) {
   .screen-layout,
   .runtime-layout {
-    --layout-grid-size: 16px;
+    --layout-grid-size: 24px;
   }
 
   .simulation-preview {
