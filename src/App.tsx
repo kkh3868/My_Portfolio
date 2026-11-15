@@ -48,7 +48,7 @@ function SiteFooter() {
           <small>FOR LOGISTICS &amp; PROCESS</small>
           </span>
         </a>
-        <span className="site-footer__tagline">LOGISTICS &amp; PROCESS SIMULATION FRAMEWORK</span>
+
         <a className="site-footer__top" href="#home">BACK TO TOP ↑</a>
       </div>
       <div className="site-footer__legal">
