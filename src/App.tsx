@@ -33,6 +33,7 @@ function SiteHeader() {
 
 function SiteFooter() {
   const year = new Date().getFullYear()
+  const experienceYear = year - 2023 + 1
 
   return (
     <footer className="site-footer">
@@ -40,7 +41,7 @@ function SiteFooter() {
         <div className="site-footer__intro">
           <h2>Geonhui Kim</h2>
           <p>
-            4년차 솔루션 개발자로서 DX·AX 기술을 활용해 제조 산업의 디지털 혁신을 이끌고, 프론트엔드부터 백엔드까지 확장 가능한 시스템과 스마트팩토리 시뮬레이션 솔루션을 개발합니다.
+            {experienceYear}년차 솔루션 개발자로서 DX·AX 기술을 활용해 제조 산업의 디지털 혁신을 이끌고, 프론트엔드부터 백엔드까지 확장 가능한 시스템과 스마트팩토리 시뮬레이션 솔루션을 개발합니다.
           </p>
           <nav className="site-footer__contacts" aria-label="프로필 및 연락처">
             <a href="https://kkh3868.notion.site/Portfolio-59debe89a94d4552b1c5363b16657adb" target="_blank" rel="noreferrer" aria-label="Notion 포트폴리오">
