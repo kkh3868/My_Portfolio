@@ -26,9 +26,11 @@ export function FrameworkArchitectureSection() {
               </span>
             </article>
             <div className="flow-connector">
-              <span className="connector-line" />
               <span className="connector-label">MODEL DATA / CONFIGURATION</span>
-              <span className="connector-arrow" aria-hidden="true">→</span>
+              <span className="connector-track" aria-hidden="true">
+                <span className="connector-line" />
+                <span className="connector-arrow">→</span>
+              </span>
             </div>
             <article className="architecture-node architecture-node--server architecture-node--engine">
               <span className="node-index">02</span>
@@ -40,9 +42,11 @@ export function FrameworkArchitectureSection() {
               </span>
             </article>
             <div className="flow-connector">
-              <span className="connector-line" />
               <span className="connector-label">RUNTIME STATE</span>
-              <span className="connector-arrow" aria-hidden="true">→</span>
+              <span className="connector-track" aria-hidden="true">
+                <span className="connector-line" />
+                <span className="connector-arrow">→</span>
+              </span>
             </div>
             <article className="architecture-node architecture-node--ui">
               <span className="node-index">03</span>
@@ -85,9 +89,6 @@ export function FrameworkArchitectureSection() {
                 <strong>Simulation Engine</strong>
               </div>
             </div>
-            <p className="base-model-overview__note">
-              개념적 모델 구성 예시 · 실제 클래스 계층을 나타내지 않습니다.
-            </p>
           </aside>
         </div>
         <p className="architecture-panel-note">
