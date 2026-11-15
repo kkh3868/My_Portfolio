@@ -5,11 +5,6 @@ export function HeroSection() {
     <section className="hero-section" id="home">
       <div className="hero-inner">
         <div className="hero-copy">
-          <div className="hero-tags">
-            <span>LOGISTICS &amp; PROCESS</span>
-            <span>SIMULATION FRAMEWORK</span>
-            <span>DISCRETE EVENT SIMULATION</span>
-          </div>
           <h1>물류와 공정의 흐름을<br /><span>시뮬레이션</span>으로<br />모델링하고 검증하다.</h1>
           <p className="hero-description">
             제조 현장의 물류·공정을 2D 모델로 구성하고, 시뮬레이션 엔진과 런타임 제어를
@@ -24,9 +19,10 @@ export function HeroSection() {
               시스템 구성 <span aria-hidden="true">↗</span>
             </a>
           </div>
-          <div className="hero-note">
-            <span className="hero-note__line" />
-            <span>MODEL THE FLOW. BUILD THE FRAMEWORK.</span>
+          <div className="hero-hashtags" aria-label="핵심 키워드">
+            <span>#LOGISTICS &amp; PROCESS</span>
+            <span>#SIMULATION FRAMEWORK</span>
+            <span>#DISCRETE EVENT SIMULATION</span>
           </div>
         </div>
         <div className="hero-visual">

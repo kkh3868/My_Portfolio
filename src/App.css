@@ -141,21 +141,18 @@
   z-index: 1;
 }
 
-.hero-tags {
+.hero-hashtags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 30px;
+  gap: 6px 16px;
+  margin-top: 26px;
 }
 
-.hero-tags span {
-  padding: 7px 9px;
-  color: #a7bdd3;
-  border: 1px solid rgba(126, 163, 199, 0.2);
-  border-radius: 3px;
+.hero-hashtags span {
+  color: var(--blue-400);
   font-family: var(--mono);
-  font-size: calc(8px + var(--font-size-increase));
-  letter-spacing: 0.11em;
+  font-size: calc(9px + var(--font-size-increase));
+  letter-spacing: 0.12em;
 }
 
 .hero-copy h1 {
@@ -229,18 +226,6 @@
   color: var(--blue-400);
 }
 
-.hero-note {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  margin-top: 50px;
-  color: #71859c;
-  font-family: var(--mono);
-  font-size: calc(8px + var(--font-size-increase));
-  letter-spacing: 0.14em;
-}
-
-.hero-note__line,
 .vision-caption__line {
   width: 30px;
   height: 1px;
@@ -2016,14 +2001,13 @@
     gap: 16px;
   }
 
-  .hero-tags {
-    gap: 6px;
-    margin-bottom: 22px;
+  .hero-hashtags {
+    gap: 5px 12px;
+    margin-top: 20px;
   }
 
-  .hero-tags span {
-    padding: 6px 7px;
-    font-size: calc(6px + var(--font-size-increase));
+  .hero-hashtags span {
+    font-size: calc(7px + var(--font-size-increase));
   }
 
   .hero-copy h1 {
@@ -2044,11 +2028,6 @@
   .button {
     min-height: 42px;
     font-size: calc(10px + var(--font-size-increase));
-  }
-
-  .hero-note {
-    margin-top: 29px;
-    font-size: calc(6px + var(--font-size-increase));
   }
 
   .hero-visual {
