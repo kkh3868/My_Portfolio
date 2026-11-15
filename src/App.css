@@ -1162,6 +1162,21 @@
   word-break: keep-all;
 }
 
+@media (min-width: 860px) {
+  .platform-section .section-heading,
+  .architecture-shell .section-heading,
+  .features-section .section-heading {
+    max-width: none;
+  }
+
+  .platform-section .section-heading p,
+  .architecture-shell .section-heading p,
+  .features-section .section-heading p {
+    max-width: none;
+    white-space: nowrap;
+  }
+}
+
 .component-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
