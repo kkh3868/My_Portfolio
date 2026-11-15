@@ -32,7 +32,7 @@ export function FrameworkOverviewSection() {
       </div>
       <div className="platform-footnote">
         <span className="footnote-mark">i</span>
-        <p>Base Model은 공통 이벤트와 헬퍼 함수를 제공하며, 이를 바탕으로 C# 모델을 구현할 수 있습니다.</p>
+        <p>Base Model은 공통 이벤트와 공통 로직을 제공하며, 이를 바탕으로 C# 모델을 구현할 수 있습니다.</p>
         <a href="#architecture">구성도 보기 <span aria-hidden="true">→</span></a>
       </div>
     </section>

@@ -54,12 +54,45 @@ export function FrameworkArchitectureSection() {
               </span>
             </article>
           </div>
-          <div className="architecture-panel__footer">
-            <span><i className="server-key" /> 서버 구성요소</span>
-            <span><i className="ui-key" /> 사용자 인터페이스</span>
-            <span className="architecture-disclaimer">개념도 · 통신 방식 미표현</span>
-          </div>
+          <aside className="base-model-overview" aria-labelledby="base-model-title">
+            <div className="base-model-overview__content">
+              <span className="base-model-overview__eyebrow">BASE MODEL / C# EXTENSION FOUNDATION</span>
+              <h3 id="base-model-title">현장별 C# 모델 개발</h3>
+              <p>
+                Base Model의 공통 이벤트와 공통 로직으로 현장별 물류·공정 로직을 구현하고,
+                시뮬레이션 엔진에서 실행·검증합니다.
+              </p>
+            </div>
+            <div className="base-model-overview__diagram" aria-label="Base Model 기반 C# 모델 구성 예시">
+              <div className="base-model-stage">
+                <small>SHARED FOUNDATION</small>
+                <strong>Base Model</strong>
+                <span>Events · Common Logic</span>
+              </div>
+              <span className="base-model-overview__arrow" aria-hidden="true" />
+              <div className="base-model-stage base-model-stage--objects">
+                <small>ILLUSTRATIVE C# OBJECTS</small>
+                <ul className="base-model-object-list">
+                  <li>Port</li>
+                  <li>Conveyor</li>
+                  <li>Rack</li>
+                  <li>AGV</li>
+                </ul>
+              </div>
+              <span className="base-model-overview__arrow" aria-hidden="true" />
+              <div className="base-model-stage">
+                <small>EXECUTION</small>
+                <strong>Simulation Engine</strong>
+              </div>
+            </div>
+            <p className="base-model-overview__note">
+              개념적 모델 구성 예시 · 실제 클래스 계층을 나타내지 않습니다.
+            </p>
+          </aside>
         </div>
+        <p className="architecture-panel-note">
+          이 구성은 프레임워크의 전체 흐름과 역할을 개략적으로 소개하며, 상세 아키텍처와 설계 내용은 공개하지 않습니다.
+        </p>
       </div>
     </section>
   )

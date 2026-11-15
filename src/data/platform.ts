@@ -42,14 +42,14 @@ export const platformCapabilities: PlatformCapability[] = [
   {
     title: 'Object-Oriented Modeling',
     description:
-      'Conveyor, Rack, MobileTransfer, ProcessingPort, Material 등의 기본 객체 모델을 기반으로 공정 및 물류 시스템을 구성하고 확장할 수 있습니다.',
+      '기본 설비·물류·자재 객체를 조합해 현장별 공정 모델을 구성하고 확장할 수 있습니다.',
     icon: 'objects',
     number: '01',
   },
   {
     title: 'Base Model Development',
     description:
-      'Base Model이 제공하는 공통 이벤트와 헬퍼 함수를 활용해 C# 기반의 현장별 모델 로직을 개발할 수 있습니다.',
+      'Base Model이 제공하는 공통 이벤트와 공통 로직을 활용해 C# 기반의 현장별 모델 로직을 개발할 수 있습니다.',
     icon: 'framework',
     number: '02',
   },
