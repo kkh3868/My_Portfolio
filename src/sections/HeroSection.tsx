@@ -11,6 +11,20 @@ export function HeroSection() {
             연결하는 프레임워크를 설계·개발합니다. 설비와 물류 객체를 확장하고 흐름을
             검증할 수 있는 기반을 만듭니다.
           </p>
+          <div className="hero-stats" aria-label="현장 검증 실적">
+            <div className="hero-stat">
+              <strong>03</strong>
+              <span>해외·국내 검증 사이트</span>
+            </div>
+            <div className="hero-stat">
+              <strong>05</strong>
+              <span>물류 시스템 검증</span>
+            </div>
+            <div className="hero-stat">
+              <strong>35</strong>
+              <span>생산 시스템 검증</span>
+            </div>
+          </div>
           <div className="hero-actions">
             <a className="button button--primary" href="#platform">
               프레임워크 살펴보기 <span aria-hidden="true">↓</span>
@@ -29,14 +43,6 @@ export function HeroSection() {
           <div className="visual-orbit visual-orbit--one" />
           <div className="visual-orbit visual-orbit--two" />
           <SimulationPreview />
-          <div className="floating-label floating-label--top">
-            <span className="label-icon">02</span>
-            <span><b>2D LAYOUT</b><small>Top-view modeling</small></span>
-          </div>
-          <div className="floating-label floating-label--bottom">
-            <span className="floating-live" />
-            <span><b>FLOW MONITORING</b><small>Object-level visibility</small></span>
-          </div>
         </div>
       </div>
     </section>
