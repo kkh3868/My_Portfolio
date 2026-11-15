@@ -6,93 +6,113 @@ export function FrameworkArchitectureSection() {
     <section className="architecture-section" id="architecture">
       <div className="section-shell architecture-shell">
         <SectionHeading
-          eyebrow="FRAMEWORK ARCHITECTURE"
-          title="Three Components, One Workflow"
-          description="모델링 서버, 시뮬레이션 엔진, 런타임 제어 UI의 역할과 모델 데이터·실행 상태의 흐름을 개념적으로 보여줍니다."
+          eyebrow="SYSTEM ARCHITECTURE"
+          title="컴포넌트 간 데이터·제어 경로"
+          description="Modeler Server의 모델 데이터는 SQLite를 통해 Simulation Engine에서 사용됩니다. 엔진은 Kafka로 제어 UI와 상태·명령을 주고받고, Socket 통신으로 MES 등 외부 시스템과 연동됩니다."
         />
         <div className="architecture-panel">
           <div className="architecture-panel__header">
-            <span>FRAMEWORK WORKFLOW</span>
-            <span><i /> COMPONENT RESPONSIBILITIES</span>
+            <span>SYSTEM COMMUNICATION MAP</span>
+            <span><i /> DATA · CONTROL · INTEGRATION</span>
           </div>
-          <div className="architecture-flow">
-            <article className="architecture-node architecture-node--server">
-              <span className="node-index">01</span>
-              <span className="node-icon"><Icon name="layout" size={21} /></span>
-              <span className="node-content">
-                <small>MODELING SERVER</small>
-                <strong>Modeler Server</strong>
-                <span>2D model design</span>
-              </span>
-            </article>
-            <div className="flow-connector">
-              <span className="connector-label">MODEL DATA / CONFIGURATION</span>
-              <span className="connector-track" aria-hidden="true">
-                <span className="connector-line" />
-                <span className="connector-arrow">→</span>
-              </span>
+          <div className="architecture-map-frame">
+            <div
+              className="architecture-map"
+              role="group"
+              aria-label="Base Model 기반 C# 개발자가 Modeler Server에서 모델을 구성하고, SQLite로 Simulation Engine에 전달합니다. 엔진은 Kafka로 제어 UI와 통신하고 Socket으로 외부 시스템과 양방향 연동합니다."
+            >
+              <article className="architecture-map__node architecture-map__node--modeler">
+                <span className="architecture-map__index">01 / MODELING</span>
+                <span className="architecture-map__icon"><Icon name="layout" size={21} /></span>
+                <span className="architecture-map__content">
+                  <strong>Modeler Server</strong>
+                  <span>2D model &amp; layout configuration</span>
+                </span>
+              </article>
+
+              <div
+                className="architecture-map__connector architecture-map__connector--sqlite"
+                role="img"
+                aria-label="SQLite를 통해 Modeler Server의 모델 데이터가 Simulation Engine으로 전달됩니다."
+              >
+                <span className="architecture-map__protocol">SQLite</span>
+                <span className="architecture-map__connector-flow architecture-map__connector-flow--forward" aria-hidden="true">
+                  <span className="architecture-map__connector-line" />
+                </span>
+              </div>
+
+              <article className="architecture-map__node architecture-map__node--engine">
+                <span className="architecture-map__index">02 / EXECUTION</span>
+                <span className="architecture-map__icon"><Icon name="engine" size={21} /></span>
+                <span className="architecture-map__content">
+                  <strong>Simulation Engine</strong>
+                  <span>Discrete-event simulation runtime</span>
+                </span>
+              </article>
+
+              <div
+                className="architecture-map__connector architecture-map__connector--socket"
+                role="img"
+                aria-label="Simulation Engine과 외부 시스템이 Socket으로 양방향 통신합니다."
+              >
+                <span className="architecture-map__protocol">Socket</span>
+                <span className="architecture-map__connector-flow architecture-map__connector-flow--bidirectional" aria-hidden="true">
+                  <span className="architecture-map__connector-line" />
+                </span>
+              </div>
+
+              <article className="architecture-map__node architecture-map__node--external">
+                <span className="architecture-map__index">04 / INTEGRATION</span>
+                <span className="architecture-map__icon"><Icon name="flow" size={21} /></span>
+                <span className="architecture-map__content">
+                  <strong>External Systems</strong>
+                  <span>MES / Other systems</span>
+                </span>
+              </article>
+
+              <div className="architecture-map__control-stack">
+                <article className="architecture-map__node architecture-map__node--control">
+                  <span className="architecture-map__index">03 / CONTROL</span>
+                  <span className="architecture-map__icon"><Icon name="monitor" size={21} /></span>
+                  <span className="architecture-map__content">
+                    <strong>Simulation Control UI</strong>
+                    <span>Runtime monitoring &amp; control</span>
+                  </span>
+                </article>
+                <div
+                  className="architecture-map__vertical-connector architecture-map__vertical-connector--kafka"
+                  role="img"
+                  aria-label="Kafka를 통해 Simulation Control UI와 Simulation Engine 사이에 제어 및 상태 정보가 오갑니다."
+                >
+                  <span className="architecture-map__vertical-arrow architecture-map__vertical-arrow--up" aria-hidden="true">↑</span>
+                  <span className="architecture-map__protocol">Kafka</span>
+                  <span className="architecture-map__vertical-arrow architecture-map__vertical-arrow--down" aria-hidden="true">↓</span>
+                </div>
+              </div>
+
+              <div className="architecture-map__developer-stack">
+                <div
+                  className="architecture-map__developer-connector"
+                  role="img"
+                  aria-label="Base Model에서 파생한 C# Custom Model을 Modeler Server에서 사용합니다."
+                >
+                  <span className="architecture-map__developer-arrow" aria-hidden="true">↑</span>
+                  <span className="architecture-map__protocol">Model Registration</span>
+                </div>
+                <article className="architecture-map__node architecture-map__node--developer">
+                  <span className="architecture-map__index">MODEL EXTENSION</span>
+                  <span className="architecture-map__icon"><Icon name="document" size={21} /></span>
+                  <span className="architecture-map__content">
+                    <strong>Custom Model Developer</strong>
+                    <span>Base Model-derived · C#</span>
+                  </span>
+                </article>
+              </div>
             </div>
-            <article className="architecture-node architecture-node--server architecture-node--engine">
-              <span className="node-index">02</span>
-              <span className="node-icon"><Icon name="engine" size={21} /></span>
-              <span className="node-content">
-                <small>ENGINE SERVER</small>
-                <strong>Simulation Engine</strong>
-                <span>Discrete-event simulation</span>
-              </span>
-            </article>
-            <div className="flow-connector">
-              <span className="connector-label">RUNTIME STATE</span>
-              <span className="connector-track" aria-hidden="true">
-                <span className="connector-line" />
-                <span className="connector-arrow">→</span>
-              </span>
-            </div>
-            <article className="architecture-node architecture-node--ui">
-              <span className="node-index">03</span>
-              <span className="node-icon"><Icon name="monitor" size={21} /></span>
-              <span className="node-content">
-                <small>USER INTERFACE</small>
-                <strong>Runtime Monitoring &amp; Control UI</strong>
-                <span>Runtime monitoring &amp; control</span>
-              </span>
-            </article>
           </div>
-          <aside className="base-model-overview" aria-labelledby="base-model-title">
-            <div className="base-model-overview__content">
-              <span className="base-model-overview__eyebrow">BASE MODEL / C# EXTENSION FOUNDATION</span>
-              <h3 id="base-model-title">현장별 C# 모델 개발</h3>
-              <p>
-                Base Model의 공통 이벤트와 공통 로직으로 현장별 물류·공정 로직을 구현하고,
-                시뮬레이션 엔진에서 실행·검증합니다.
-              </p>
-            </div>
-            <div className="base-model-overview__diagram" aria-label="Base Model 기반 C# 모델 구성 예시">
-              <div className="base-model-stage">
-                <small>SHARED FOUNDATION</small>
-                <strong>Base Model</strong>
-                <span>Events · Common Logic</span>
-              </div>
-              <span className="base-model-overview__arrow" aria-hidden="true" />
-              <div className="base-model-stage base-model-stage--objects">
-                <small>ILLUSTRATIVE C# OBJECTS</small>
-                <ul className="base-model-object-list">
-                  <li>Port</li>
-                  <li>Conveyor</li>
-                  <li>Rack</li>
-                  <li>AGV</li>
-                </ul>
-              </div>
-              <span className="base-model-overview__arrow" aria-hidden="true" />
-              <div className="base-model-stage">
-                <small>EXECUTION</small>
-                <strong>Simulation Engine</strong>
-              </div>
-            </div>
-          </aside>
         </div>
         <p className="architecture-panel-note">
-          이 구성은 프레임워크의 전체 흐름과 역할을 개략적으로 소개하며, 상세 아키텍처와 설계 내용은 공개하지 않습니다.
+          주요 컴포넌트와 통신 경로를 개략화한 구조도이며, 세부 구현과 내부 설계는 제외했습니다.
         </p>
       </div>
     </section>
