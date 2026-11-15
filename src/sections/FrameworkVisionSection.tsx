@@ -58,10 +58,10 @@ export function FrameworkVisionSection() {
       <div className="vision-content">
         <div className="vision-copy">
           <span className="eyebrow">FRAMEWORK VISION</span>
-          <h2>운영의 흐름을 모델로 만들고, 실행으로 검증합니다.</h2>
+          <h2>복잡한 현장을 디지털로 재현해, 더 나은 운영을 미리 설계합니다.</h2>
           <p>
-            공정·물류의 구성과 운영 규칙을 모델로 구체화하고,
-            시뮬레이션 결과를 바탕으로 다양한 운영 시나리오를 검토합니다.
+            공정과 물류의 흐름을 2D 가상 환경에 구현하고, 다양한 운영 시나리오를 실행해 결과를 비교합니다.
+            실제 현장에 적용하기 전 변화의 영향을 확인해, 현장에 적합한 운영 방향을 찾도록 지원합니다.
           </p>
         </div>
         <div
