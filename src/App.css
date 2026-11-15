@@ -3050,9 +3050,33 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .model-palette,
   .simulation-properties {
     display: none;
+  }
+
+  .model-palette {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px 10px;
+    padding: 8px 10px;
+    border-right: 0;
+    border-bottom: 1px solid #1e2d40;
+  }
+
+  .model-palette > .screen-section-label {
+    flex-basis: 100%;
+  }
+
+  .model-palette > span:not(.screen-section-label) {
+    width: auto;
+    gap: 4px;
+  }
+
+  .model-palette .palette-symbol {
+    width: 16px;
+    height: 16px;
+    flex-basis: 16px;
   }
 
   .screen-layout,

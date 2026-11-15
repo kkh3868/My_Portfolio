@@ -129,14 +129,18 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
     gridSize: 24,
     offsetX: 9,
     offsetY: 31,
+    isCompact: false,
   })
   const { offsetX: gridOffsetX, offsetY: gridOffsetY } = diagramMetrics
+  const { isCompact } = diagramMetrics
   const unitSize = (diagramMetrics.gridSize * 920) / diagramMetrics.width
+  const compactViewBoxWidth = unitSize * 11.5
+  const compactViewBoxHeight = unitSize * 9.5
   const originX = unitSize
   const portY = unitSize
   const objectSize = unitSize * 2
   const agvY = portY + objectSize + unitSize * 0.75
-  const conveyorY = agvY + unitSize + unitSize * 0.75
+  const conveyorY = agvY + unitSize + unitSize * (isCompact ? 1.1 : 0.75)
   const conveyorPositions = [originX, originX + objectSize, originX + objectSize * 2]
   const rackX = originX + objectSize * 3 + unitSize * 0.5
   const rackY = conveyorY - unitSize / 2
@@ -232,6 +236,10 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
     const diagram = diagramRef.current
     if (!diagram) return
 
+    const compactQuery = window.matchMedia('(max-width: 620px)')
+    const updateCompactLayout = () => {
+      setDiagramMetrics((current) => ({ ...current, isCompact: compactQuery.matches }))
+    }
     const observer = new ResizeObserver(([entry]) => {
       if (entry) {
         const gridSize = Number.parseFloat(
@@ -257,19 +265,61 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
           offsetY: parentRect
             ? (diagramRect.top - parentRect.top - borderTop) / scale
             : 31,
+          isCompact: compactQuery.matches,
         })
       }
     })
+    compactQuery.addEventListener('change', updateCompactLayout)
     observer.observe(diagram)
 
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      compactQuery.removeEventListener('change', updateCompactLayout)
+    }
   }, [])
+
+  const connectionLayer = idPrefix === 'modeling' && (
+    <g className="diagram-connection">
+      <path d={`M${portCenter.x} ${portCenter.y}L${agvCenter.x} ${agvCenter.y}`} markerEnd={`url(#${arrowId})`} />
+      <path d={`M${agvCenter.x} ${agvCenter.y}L${conveyorCenters[0].x} ${conveyorCenters[0].y}`} markerEnd={`url(#${arrowId})`} />
+      <path d={`M${conveyorCenters[0].x} ${conveyorCenters[0].y}L${conveyorCenters[1].x} ${conveyorCenters[1].y}`} markerEnd={`url(#${arrowId})`} />
+      <path d={`M${conveyorCenters[1].x} ${conveyorCenters[1].y}L${conveyorCenters[2].x} ${conveyorCenters[2].y}`} markerEnd={`url(#${arrowId})`} />
+      <path d={`M${conveyorCenters[2].x} ${conveyorCenters[2].y}L${rackCenter.x} ${rackCenter.y}`} markerEnd={`url(#${arrowId})`} />
+    </g>
+  )
+  const labelLayer = (
+    <g
+      className="diagram-object-label"
+      style={{ fontSize: unitSize * (isCompact ? 0.4 : 0.34) }}
+    >
+      <text x={portCenter.x} y={portLabelY} textAnchor="middle">PORT-01</text>
+      <text x={agvCenter.x} y={agvLabelY} textAnchor="middle">AGV-01</text>
+      {conveyorCenters.map((center, index) => (
+        <text
+          key={`conveyor-label-${index}`}
+          x={center.x}
+          y={conveyorLabelY}
+          textAnchor="middle"
+        >
+          <tspan x={center.x}>CONVEYOR-</tspan>
+          <tspan x={center.x} dy="1.15em">{`0${index + 1}`}</tspan>
+        </text>
+      ))}
+      <text x={rackCenter.x} y={rackLabelY} textAnchor="middle">RACK-01</text>
+    </g>
+  )
 
   return (
     <svg
       ref={diagramRef}
       className={`layout-diagram${idPrefix === 'modeling' ? ' layout-diagram--modeler' : ''}`}
-      viewBox={idPrefix === 'runtime' ? '0 0 920 380' : '0 0 920 560'}
+      viewBox={
+        isCompact
+          ? `0 0 ${compactViewBoxWidth} ${compactViewBoxHeight}`
+          : idPrefix === 'runtime'
+            ? '0 0 920 380'
+            : '0 0 920 560'
+      }
       preserveAspectRatio="xMidYMid meet"
       role="img"
       aria-labelledby={`${idPrefix}-title ${idPrefix}-description`}
@@ -300,31 +350,9 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
         <rect className="diagram-conveyor__selection" x={conveyors[1].border.x} y={conveyors[1].border.y} width={conveyors[1].border.width} height={conveyors[1].border.height} rx="3" />
       </g>
       <image href={rack.href} x={rack.x} y={rack.y} width={rack.width} height={rack.height} preserveAspectRatio="none" />
-      <g className="diagram-object-label" style={{ fontSize: unitSize * 0.34 }}>
-        <text x={portCenter.x} y={portLabelY} textAnchor="middle">PORT-01</text>
-        <text x={agvCenter.x} y={agvLabelY} textAnchor="middle">AGV-01</text>
-        {conveyorCenters.map((center, index) => (
-          <text
-            key={`conveyor-label-${index}`}
-            x={center.x}
-            y={conveyorLabelY}
-            textAnchor="middle"
-          >
-            <tspan x={center.x}>CONVEYOR-</tspan>
-            <tspan x={center.x} dy="1.15em">{`0${index + 1}`}</tspan>
-          </text>
-        ))}
-        <text x={rackCenter.x} y={rackLabelY} textAnchor="middle">RACK-01</text>
-      </g>
-      {idPrefix === 'modeling' && (
-        <g className="diagram-connection">
-          <path d={`M${portCenter.x} ${portCenter.y}L${agvCenter.x} ${agvCenter.y}`} markerEnd={`url(#${arrowId})`} />
-          <path d={`M${agvCenter.x} ${agvCenter.y}L${conveyorCenters[0].x} ${conveyorCenters[0].y}`} markerEnd={`url(#${arrowId})`} />
-          <path d={`M${conveyorCenters[0].x} ${conveyorCenters[0].y}L${conveyorCenters[1].x} ${conveyorCenters[1].y}`} markerEnd={`url(#${arrowId})`} />
-          <path d={`M${conveyorCenters[1].x} ${conveyorCenters[1].y}L${conveyorCenters[2].x} ${conveyorCenters[2].y}`} markerEnd={`url(#${arrowId})`} />
-          <path d={`M${conveyorCenters[2].x} ${conveyorCenters[2].y}L${rackCenter.x} ${rackCenter.y}`} markerEnd={`url(#${arrowId})`} />
-        </g>
-      )}
+      {isCompact
+        ? <>{connectionLayer}{labelLayer}</>
+        : <>{labelLayer}{connectionLayer}</>}
     </svg>
   )
 }
