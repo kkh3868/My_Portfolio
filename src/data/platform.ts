@@ -40,24 +40,46 @@ export const platformComponents: PlatformComponent[] = [
 
 export const platformCapabilities: PlatformCapability[] = [
   {
-    title: 'Object-Oriented Modeling',
+    title: 'Lightweight 2D Simulation',
     description:
-      '기본 설비·물류·자재 객체를 조합해 현장별 공정 모델을 구성하고 확장할 수 있습니다.',
-    icon: 'objects',
+      '3D 렌더링 없이 2D 평면 모델을 사용해 GPU 의존도를 낮추고, 그래픽 성능이 제한된 컴퓨터에서도 운영하기 쉽습니다.',
+    icon: 'layout',
     number: '01',
   },
   {
-    title: 'Base Model Development',
+    title: 'Parallel Event Processing',
     description:
-      'Base Model이 제공하는 공통 이벤트와 공통 로직을 활용해 C# 기반의 현장별 모델 로직을 개발할 수 있습니다.',
-    icon: 'framework',
+      '이벤트 처리를 병렬 스레드로 분산해 멀티코어 CPU를 활용하도록 설계했습니다.',
+    icon: 'engine',
     number: '02',
   },
   {
-    title: '2D Material Flow Visualization',
+    title: 'Portable Project Data',
     description:
-      'Top-view 2D 레이아웃에서 설비 배치와 객체 상태, 자재 이동 흐름을 확인합니다.',
-    icon: 'flow',
+      'SQLite 기반으로 프로젝트 데이터를 관리해 별도 DB 서버 설치 없이 프로젝트를 복제하고 옮기기 쉽습니다.',
+    icon: 'objects',
     number: '03',
+  },
+  {
+    title: 'Cross-platform Server Runtime',
+    description:
+      '.NET Core 기반 모델링 서버와 시뮬레이션 엔진은 Linux 등 다양한 OS에서 실행할 수 있습니다.',
+    note: '제어 UI는 WPF 기반으로 크로스플랫폼을 지원하지 않습니다.',
+    icon: 'framework',
+    number: '04',
+  },
+  {
+    title: 'Multi-user Runtime Control',
+    description:
+      'Kafka 기반 스트리밍·제어 구조로 여러 사용자가 시뮬레이션을 함께 모니터링하고 제어할 수 있습니다.',
+    icon: 'monitor',
+    number: '05',
+  },
+  {
+    title: 'C# Model Development',
+    description:
+      'Base Model의 공통 이벤트와 공통 로직을 활용해 현장별 물류·공정 모델을 C#으로 개발할 수 있습니다.',
+    icon: 'flow',
+    number: '06',
   },
 ]

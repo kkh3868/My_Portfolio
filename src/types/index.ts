@@ -18,6 +18,7 @@ export interface PlatformComponent {
 export interface PlatformCapability {
   title: string
   description: string
+  note?: string
   icon: IconName
   number: string
 }

@@ -1720,6 +1720,16 @@
   word-break: keep-all;
 }
 
+.capability-card__note {
+  margin-top: 16px;
+  padding-right: 24px;
+  display: block;
+  color: #9aa6b2;
+  font-size: calc(9px + var(--font-size-increase));
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
 .capability-arrow {
   position: absolute;
   right: 22px;
@@ -1959,6 +1969,10 @@
 
   .section-shell {
     padding: 82px 26px;
+  }
+
+  .features-section .section-heading p {
+    white-space: normal;
   }
 
   .base-model-overview {

@@ -8,7 +8,7 @@ export function FrameworkCapabilitiesSection() {
       <SectionHeading
         eyebrow="FRAMEWORK CAPABILITIES"
         title="Designed for Industrial Simulation"
-        description="객체 기반 모델링, Base Model 기반 개발, 2D 흐름 시각화를 통해 현장별 시뮬레이션 모델을 구성합니다."
+        description="저사양 환경을 위한 2D·병렬 처리부터 쉬운 프로젝트 복제와 다중 사용자 제어까지 지원합니다."
       />
       <div className="capability-grid">
         {platformCapabilities.map((capability) => (
@@ -19,6 +19,7 @@ export function FrameworkCapabilitiesSection() {
             </div>
             <h3>{capability.title}</h3>
             <p>{capability.description}</p>
+            {capability.note && <small className="capability-card__note">{capability.note}</small>}
             <span className="capability-arrow" aria-hidden="true">↗</span>
           </article>
         ))}
