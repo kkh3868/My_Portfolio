@@ -334,9 +334,9 @@ function LayoutDiagram({ idPrefix }: LayoutDiagramProps) {
       }
       preserveAspectRatio="xMidYMid meet"
       role="img"
-      aria-labelledby={`${idPrefix}-title ${idPrefix}-description`}
+      aria-label="2D 공정 및 물류 시뮬레이션 레이아웃"
+      aria-describedby={`${idPrefix}-description`}
     >
-      <title id={`${idPrefix}-title`}>2D 공정 및 물류 시뮬레이션 레이아웃</title>
       <desc id={`${idPrefix}-description`}>
         위에서부터 자재 공급 Port, AGV, 가로로 연결된 Conveyor 세 대와
         오른쪽 Rack 순서로 배치된 레이아웃입니다.
