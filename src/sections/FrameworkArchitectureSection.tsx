@@ -7,19 +7,18 @@ export function FrameworkArchitectureSection() {
       <div className="section-shell architecture-shell">
         <SectionHeading
           eyebrow="SYSTEM ARCHITECTURE"
-          title="컴포넌트 간 데이터·제어 경로"
-          description="Modeler Server의 모델 데이터는 SQLite를 통해 Simulation Engine에서 사용됩니다. 엔진은 Kafka로 제어 UI와 상태·명령을 주고받고, Socket 통신으로 MES 등 외부 시스템과 연동됩니다."
+          title="How the Simulation System Connects"
+          description={'Base Model 기반 Custom Model을 Modeler에 등록해 레이아웃에 배치합니다.\n모델링 정보는 SQLite를 통해 Simulation Engine으로 전달되어 실행되며, 제어 UI와 Kafka로 상태와 명령을 주고받습니다.\nMES 등 외부 시스템은 Socket으로 연결해 정보를 교환합니다.'}
         />
         <div className="architecture-panel">
           <div className="architecture-panel__header">
-            <span>SYSTEM COMMUNICATION MAP</span>
-            <span><i /> DATA · CONTROL · INTEGRATION</span>
+            <span>SYSTEM ARCHITECTURE MAP</span>
           </div>
           <div className="architecture-map-frame">
             <div
               className="architecture-map"
               role="group"
-              aria-label="Base Model 기반 C# 개발자가 Modeler Server에서 모델을 구성하고, SQLite로 Simulation Engine에 전달합니다. 엔진은 Kafka로 제어 UI와 통신하고 Socket으로 외부 시스템과 양방향 연동합니다."
+              aria-label="Base Model 기반 Custom Model을 Modeler Server에 등록하고 SQLite로 Simulation Engine에 전달합니다. 엔진은 Kafka로 제어 UI와 상태·명령을 주고받으며 Socket으로 외부 시스템과 통신합니다."
             >
               <article className="architecture-map__node architecture-map__node--modeler">
                 <span className="architecture-map__index">01 / MODELING</span>
